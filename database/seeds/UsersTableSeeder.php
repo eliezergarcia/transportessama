@@ -24,15 +24,17 @@ class UsersTableSeeder extends Seeder
             'birthday_date' => '1995/07/31',
         ]);
 
-        /*User::create([
+        User::create([
             'first_name' => 'Luis',
             'last_name' => 'Salazar',
             'user_name' => 'luissalazar',
             'email' => 'albertosg@transportessama.com',
             'password' => 'albertosg',
             'password_encrypted' => 'albertosg',
-            'avatar' => ''
-        ]);*/
+            'avatar' => '',
+            'contact_phone' => '8129368475',
+            'birthday_date' => '1995/07/31',
+        ]);
 
     }
 }
