@@ -21,7 +21,7 @@
 			<div class="kt-subheader__toolbar">
 				<div class="kt-subheader__toolbar-wrapper">
 					<button type="button" class="btn btn-default btn-sm btn-bold btn-upper" @click="showCreateModal()">Crear</button>
-					<a href="#" class="btn btn-default btn-sm btn-bold btn-upper">Editar</a>
+					<!-- <a href="#" class="btn btn-default btn-sm btn-bold btn-upper">Editar</a> -->
 					<!-- <a href="#" class="btn btn-default btn-sm btn-bold btn-upper">Configuración</a>
 					<div class="dropdown dropdown-inline" data-toggle="kt-tooltip" title="Quick actions" data-placement="top">
 						<a href="#" class="btn btn-icon btn btn-label btn-label-brand btn-bold" data-toggle="dropdown" data-offset="0,5px" aria-haspopup="true" aria-expanded="false">
@@ -155,23 +155,23 @@
 									</div>
 								</td>
 								<td v-else>
-									<a @click="showTruckInformationModal(truck)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver detalles">					
+									<a @click="showTruckInformationModal(truck)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver detalles">		
 										<i class="flaticon2-expand"></i>						
 									</a>
 									<!-- <a @click="showRevisionModal(truck)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Generar inspección"><i class="flaticon-clipboard"></i>
 									</a> -->
 									<div class="dropdown dropdown-inline">
-										<button type="button" class="btn btn-clean btn-icon btn-sm btn-icon-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<i class="flaticon-more-1"></i>
-										</button>
+											<button type="button" class="btn btn-clean btn-icon btn-sm btn-icon-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<i class="flaticon-more-1"></i>
+											</button>
 										<div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(31px, 32px, 0px);">
-											<a class="kt-nav__link dropdown-item" href="#" @click="showPTTInspectionModal(truck)">
+											<a class="kt-nav__link dropdown-item" href="#" @click="showInspeccionDiarioModal(truck)">
 												<i class="kt-nav__link-icon flaticon-clipboard"></i> 
-												<span class="kt-nav__link-text">Points truck & trailer inpsection</span>
+												<span class="kt-nav__link-text">Inspección diario</span>
 											</a>
 											<a class="dropdown-item" href="#" @click="showDailyInspectionModal(truck)">
 												<i class="flaticon-clipboard"></i> 
-												Ins. Diario Unidad
+												Matenimiento Preventivo
 											</a>
 											<div class="dropdown-divider"></div>
 											<a class="dropdown-item" href="#" @click="showEditModal(truck)">
@@ -310,7 +310,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="mediumModalLabel">Insepección diaria de unidades y cajas</h5>
+                    <h5 class="modal-title" id="mediumModalLabel">Mantenimiento Preventivo</h5>
                     <button type="button" class="close" @click="closeDailyInspectionModal()" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -554,88 +554,133 @@
     </div>
     <!-- Fin de Modal Daily Inspection -->
 
-    <!-- Modal Points Truck & Trailer Inspection -->
-    <div class="modal fade" id="revisionPTTIModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="mediumModalLabel">Truck & Trailer Inspection</h5>
-                    <button type="button" class="close" @click="closeTTInspectionModal()" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group row">
-                    	<div class="col-lg-6">
-	                        <label for="name" class=" form-control-label">Name/Nombre</label>
-	                        <input type="text" name="name" placeholder="Ingrese el name/nombre..." class="form-control form-control-sm">
-                    	</div>
-                    	<div class="col-lg-6">
-	                        <label for="date" class=" form-control-label">Fecha/Date</label>
-	                        <input type="text" name="date" placeholder="Ingrese la fecha/date..." class="form-control form-control-sm">
-                    	</div>
-                    </div>
-                    <div class="form-group row">
-                    	<div class="col-lg-6">
-	                        <label for="unit_number" class=" form-control-label">Número de unidad/Unit number</label>
-	                        <input type="text" name="unit_number" placeholder="Ingrese el número de unidad/unit number..." class="form-control form-control-sm">
-                    	</div>
-                    	<div class="col-lg-6">
-	                        <label for="unit_plates" class=" form-control-label">Placas/Plates</label>
-	                        <input type="text" name="unit_plates" placeholder="Ingrese las placas/plates..." class="form-control form-control-sm">
-                    	</div>
-                    </div>
-                    <div class="form-group row">
-                    	<div class="col-lg-6">
-	                        <label for="trailer" class=" form-control-label">Número de caja/Trailer number</label>
-	                        <input type="text" name="trailer" placeholder="Ingrese el número de caja/trailer number..." class="form-control form-control-sm">
-                    	</div>
-                    	<div class="col-lg-6">
-	                        <label for="trailer_plates" class=" form-control-label">Placas/Plates</label>
-	                        <input type="text" name="trailer_plates" placeholder="Ingrese las placas/plates..." class="form-control form-control-sm">
-                    	</div>
-                    </div>
-                    <div class="form-group row">
-                    	<div class="col-lg-12">
-                    		<a href="#" class="">
-                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            	<img src="{{ asset('assets/media/inspections/pointstruck.png') }}" alt="image" width="80%">
-                        	</a>
-                    	</div>
-                    </div>
-                    <div class="form-group row">
-                    	<div v-for="(inspectionPoint, index) in inspectionPoints" v-if="inspectionPoint.type === 'TRUCK & TRAILER'" class="col-lg-6">
-                    		<div class="form-group row">
-	                    		<div class="col-lg-5">
-	                    			<select class="form-control form-control-sm" name="point_inspection_value" id="point_inspection_value">
-										<option value="1">Buen estado</option>
-										<option value="2">Mal estado</option>
-										<option value="3">No aplica</option>
-									</select>
-	                    		</div>                    		
-								<div class="col-lg-7 col-form-label">
-		                        	<label for="trailer_plates" class=" form-control-label">
-		                        		@{{ index }}. @{{ inspectionPoint.point_name }}
-		                        	</label>
+    <!-- Modal Inspeccion Diario -->
+    <div class="modal fade" id="inspeccionDiarioModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+    	<form method="POST" action="{{ route('inspecciones.store') }}" class="kt-form kt-form--label-right">				
+			{!! csrf_field() !!}
+			<input type="hidden" name="truck_id" id="truck_id">
+	        <div class="modal-dialog modal-lg" role="document">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <h5 class="modal-title" id="mediumModalLabel">Inspección diario</h5>
+	                    <button type="button" class="close" @click="closeInspeccionDiarioModal()" aria-label="Close">
+	                        <span aria-hidden="true">&times;</span>
+	                    </button>
+	                </div>
+	                <div class="modal-body">
+	                    <div class="form-group row">
+	                    	<div class="col-lg-6">
+		                        <label for="name" class=" form-control-label">Name/Nombre <span class="text-danger">*</span></label>
+		                        <input type="text" name="name" placeholder="Ingrese el name/nombre..." class="form-control form-control-sm" required>
+		                        <span class="form-text text-muted">Porfavor ingrese el nombre</span>
+	                    	</div>
+	                    	<div class="col-lg-6">
+		                        <label for="date" class=" form-control-label">Fecha/Date <span class="text-danger">*</span></label>
+		                        <input type="date" name="date" placeholder="Ingrese la fecha/date..." class="form-control form-control-sm" required>
+		                        <span class="form-text text-muted">Porfavor ingrese la fecha</span>
+	                    	</div>
+	                    </div>
+	                    <div class="form-group row">
+	                    	<div class="col-lg-6">
+		                        <label for="unit_number" class=" form-control-label">Número de unidad/Unit number <span class="text-danger">*</span></label>
+		                        <input type="text" name="unit_number" id="unit_number" placeholder="Ingrese el número de unidad/unit number..." class="form-control form-control-sm" required>
+		                        <span class="form-text text-muted">Porfavor ingrese el número de unidad</span>
+	                    	</div>
+	                    	<div class="col-lg-6">
+		                        <label for="unit_plates" class=" form-control-label">Placas/Plates <span class="text-danger">*</span></label>
+		                        <input type="text" name="unit_plates" id="unit_plates" placeholder="Ingrese las placas/plates..." class="form-control form-control-sm" required>
+		                        <span class="form-text text-muted">Porfavor ingrese las placas</span>
+	                    	</div>
+	                    </div>
+	                    <div class="form-group row">
+	                    	<div class="col-lg-6">
+		                        <label for="trailer" class=" form-control-label">Número de caja/Trailer number <span class="text-danger">*</span></label>
+		                        <!-- <input type="text" name="trailer_number" id="trailer_number" placeholder="Ingrese el número de caja/trailer number..." class="form-control form-control-sm"> -->
+		                        <select class="form-control form-control-sm" name="box_id" id="trailer_number" @change="findPlates()" required>
+									<option v-for="box in boxes" 
+											:value="box.id"
+											v-text="box.trailer">
+									</option>
+									<option selected>Seleccionar...</option>
+								</select>
+								<span class="form-text text-muted">Porfavor selecciona la caja</span>
+	                    	</div>
+	                    	<div class="col-lg-6">
+		                        <label for="trailer_plates" class=" form-control-label">Placas/Plates <span class="text-danger">*</span></label>
+		                        <input type="text" name="trailer_plates" id="trailer_plates" placeholder="Ingrese las placas/plates..." class="form-control form-control-sm" required>
+		                        <span class="form-text text-muted">Porfavor ingrese las placas</span>
+	                    	</div>
+	                    </div>
+	                    <div class="form-group row">
+	                    	<div class="col-lg-12">
+	                    		<a href="#" class="">
+	                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                            	<img src="{{ asset('assets/media/inspections/pointstruck.png') }}" alt="image" width="80%">
+	                        	</a>
+	                    	</div>
+	                    </div>
+	                    <div class="form-group row">
+	                    	<div v-for="(inspectionPoint, index) in inspectionPoints" v-if="inspectionPoint.type === 'TRUCK & TRAILER'" class="col-lg-6">
+	                    		<div class="form-group row">
+		                    		<div class="col-lg-5">
+		                    			<select class="form-control form-control-sm" name="points_inspection[]" id="point_inspection_value" required>
+		                    				<option value="">Selecciona...</option>
+											<option value="1">Buen estado</option>
+											<option value="2">Mal estado</option>
+											<option value="3">No aplica</option>
+										</select>
+		                    		</div>                    		
+									<div class="col-lg-7 col-form-label">
+			                        	<label for="trailer_plates" class=" form-control-label">
+			                        		@{{ index }}. @{{ inspectionPoint.point_name }}
+			                        	</label>
+		                    		</div>
 	                    		</div>
-                    		</div>
-                    	</div>
-                    </div>
-                    <div class="form-group row">
-                    	<div class="col-lg-12">
-	                        <label for="comments" class=" form-control-label">Comentarios/Comments</label>
-	                        <textarea class="form-control" name="comments" id="comments" rows="3"></textarea>
-                    	</div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-brand" @click="closeTTInspectionModal()">Cerrar</button>
-                    <button type="button" class="btn btn-brand" @click="createUser()">Guardar</button>
-                </div>
-            </div>
-        </div>
+	                    	</div>
+	                    </div>
+	                    <div class="form-group row">
+	                    	<div class="col-lg-6">
+		                        <label for="trailer" class=" form-control-label">Conductor/Driver <span class="text-danger">*</span></label>
+		                        <!-- <input type="text" name="trailer_number" id="trailer_number" placeholder="Ingrese el número de caja/trailer number..." class="form-control form-control-sm"> -->
+		                        <select class="form-control form-control-sm" name="driver_id" id="driver_id" @change="findPlates()" required>
+									<option v-for="driver in drivers" 
+											:value="driver.id"
+											v-text="driver.first_name">
+									</option>
+									<option selected>Seleccionar...</option>
+								</select>
+								<span class="form-text text-muted">Porfavor selecciona el conductor</span>
+	                    	</div>
+	                    	<div class="col-lg-6">
+		                        <label for="trailer" class=" form-control-label">Coordiandor/Coordinator <span class="text-danger">*</span></label>
+		                        <!-- <input type="text" name="trailer_number" id="trailer_number" placeholder="Ingrese el número de caja/trailer number..." class="form-control form-control-sm"> -->
+		                        <select class="form-control form-control-sm" name="coordinator_id" id="coordinator_id" @change="findPlates()" required>
+									<option v-for="coordinator in coordinators" 
+											:value="coordinator.id"
+											v-text="coordinator.first_name">
+									</option>
+									<option selected>Seleccionar...</option>
+								</select>
+								<span class="form-text text-muted">Porfavor selecciona el coordinador</span>
+	                    	</div>
+	                    </div>
+	                    <div class="form-group row">
+	                    	<div class="col-lg-12">
+		                        <label for="comments" class=" form-control-label">Comentarios/Comments</label>
+		                        <textarea class="form-control" name="comments" id="comments" rows="3"></textarea>
+	                    	</div>
+	                    	<span class="form-text text-muted">Ingresa comentarios si es necesario</span>
+	                    </div>
+	                </div>
+	                <div class="modal-footer">
+	                    <button type="button" class="btn btn-outline-brand" @click="closeInspeccionDiarioModal()">Cerrar</button>
+	                    <button type="submit" class="btn btn-brand">Guardar</button>
+	                </div>
+	            </div>
+	        </div>
+	    </form>
     </div>
-    <!-- Fin de Modal Generar revisión -->
+    <!-- Fin de Modal Inspeccion Diario -->
 
     <!-- Modal Editar Información de Tractor -->
     <div class="modal fade" id="editTruckModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
@@ -804,11 +849,14 @@
 		  	data : {
 		    	trucks : [],
 		    	truck : [],
+		    	boxes : [],
 		    	types : [],
 		    	brands : [],
 		    	services : [],
 		    	owners : [],
 		    	inspectionPoints : [],
+		    	drivers : [],
+		    	coordinators : [],
 		    	id_truck : 0,
 		    	number : '',
 		    	type_id : '',
@@ -1172,21 +1220,41 @@
 					this.id_user = 0;
 					$('#activateTruckModal').modal('hide');
 				},
-				showPTTInspectionModal() {
+				showInspeccionDiarioModal(truck = []) {
 		  			let me = this;
 		  			axios.get(this.base_url + '/puntosInspeccion/listarTTI')
 			      	.then(response => {
 			      		console.log(response.data);
-			      		me.inspectionPoints = response.data;
+			      		me.inspectionPoints = response.data.points;
+			      		me.boxes = response.data.boxes;
+			      		me.drivers = response.data.drivers;
+			      		me.coordinators = response.data.coordinators;
+			      		$("#truck_id").val(truck['id']);
+			      		$("#unit_number").val(truck['number']);
+			      		$("#unit_plates").val(truck['plates']);
+						$('#inspeccionDiarioModal').modal('show');
 			      	})
 			      	.catch(error => {
 			        	console.log(error)
 			        	this.errored = true
 			      	})
-					$('#revisionPTTIModal').modal('show');
 				},
-				closeTTInspectionModal() {
-		  			$('#revisionPTTIModal').modal('hide');
+				findPlates()
+				{
+					let me = this;
+					console.log(document.getElementById("trailer_number").value);
+		  			axios.get(this.base_url + '/cajas/buscarPlacas/' + document.getElementById("trailer_number").value)
+			      	.then(response => {
+			      		console.log(response.data);
+			      		$("#trailer_plates").val(response.data[0].plates);
+			      	})
+			      	.catch(error => {
+			        	console.log(error)
+			        	this.errored = true
+			      	})
+				},
+				closeInspeccionDiarioModal() {
+		  			$('#inspeccionDiarioModal').modal('hide');
 				},
 				showTruckInformationModal(truck = []){
 					this.id_truck = truck['id'];
@@ -1236,5 +1304,46 @@
 			    });
 			}, 300);
 		} );
+		@if(session()->has('success'))
+			toastr.options = {
+			  "closeButton": true,
+			  "debug": true,
+			  "newestOnTop": true,
+			  "progressBar": true,
+			  "positionClass": "toast-top-right",
+			  "preventDuplicates": true,
+			  "showDuration": "300",
+			  "hideDuration": "1000",
+			  "timeOut": "5000",
+			  "extendedTimeOut": "1000",
+			  "showEasing": "swing",
+			  "hideEasing": "linear",
+			  "showMethod": "fadeIn",
+			  "hideMethod": "fadeOut"
+			};
+
+			toastr.success("{{ session('success') }}", "Correcto");
+        @endif
+
+        @if(session()->has('error'))
+			toastr.options = {
+			  "closeButton": true,
+			  "debug": true,
+			  "newestOnTop": true,
+			  "progressBar": true,
+			  "positionClass": "toast-top-right",
+			  "preventDuplicates": true,
+			  "showDuration": "300",
+			  "hideDuration": "1000",
+			  "timeOut": "5000",
+			  "extendedTimeOut": "1000",
+			  "showEasing": "swing",
+			  "hideEasing": "linear",
+			  "showMethod": "fadeIn",
+			  "hideMethod": "fadeOut"
+			};
+
+			toastr.error("{{ session('error') }}", "Incorrecto");
+        @endif
 	</script>
 @endsection

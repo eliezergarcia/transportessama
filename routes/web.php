@@ -42,5 +42,7 @@ Route::post('/cajas/activar/{id}', 'BoxController@activate')->name('cajas.activa
 Route::delete('/cajas/desactivar/{id}', 'BoxController@deactivate')->name('cajas.deactivate');
 Route::get('/cajas/relacionesCrear', 'BoxController@relationsCreate')->name('cajas.relationsCreate');
 Route::get('/cajas/relaciones/{id}', 'BoxController@relations')->name('cajas.relations');
+Route::get('/cajas/buscarPlacas/{id}', 'BoxController@findPlates')->name('cajas.findPlates');
 Route::resource('cajas', 'BoxController');
 
+Route::resource('inspecciones', 'InspectionController');

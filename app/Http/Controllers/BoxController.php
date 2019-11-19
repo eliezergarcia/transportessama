@@ -51,6 +51,13 @@ class BoxController extends Controller
         return $data;
     }
 
+    public function findPlates(Request $request, $id)
+    {
+        $box = Box::where('id', $id)->with(['type', 'brand'])->get();
+
+        return $box;
+    }
+
     public function relationsCreate()
     {
         $types = Type::where('type', 'BOX')->get();

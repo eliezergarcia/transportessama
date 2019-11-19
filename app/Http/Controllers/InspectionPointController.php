@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Box;
+use App\Driver;
+use App\Coordinator;
 use App\InspectionPoint;
 use Illuminate\Http\Request;
 
@@ -29,7 +32,18 @@ class InspectionPointController extends Controller
         $points = InspectionPoint::where('inactive_at', null)
                                 ->where('type', 'TRUCK & TRAILER')->get();
 
-        return $points;
+        $boxes = Box::with(['type', 'brand'])->get();
+        $drivers = Driver::where('inactive_at', null)->get();
+        $coordinators = Coordinator::where('inactive_at', null)->get();
+
+        $data = [
+            'points' => $points,
+            'boxes' => $boxes,
+            'drivers' => $drivers,
+            'coordinators' => $coordinators,
+        ];
+
+        return $data;
     }
 
     /**

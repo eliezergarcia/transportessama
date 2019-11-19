@@ -19,5 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call(OwnersTableSeeder::class);
         $this->call(InspectionPointsTableSeeder::class);
         $this->call(BoxesTableSeeder::class);
+        $this->call(DriversTableSeeder::class);
+        $this->call(CoordinatorsTableSeeder::class);
+        $this->call(MechanicsTableSeeder::class);
     }
 }
