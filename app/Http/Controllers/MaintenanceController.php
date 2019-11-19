@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Inspection;
+use App\Maintenance;
 use App\InspectionPoint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class InspectionController extends Controller
+class MaintenanceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class InspectionController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -38,33 +38,47 @@ class InspectionController extends Controller
      */
     public function store(Request $request)
     {
+        /*dd($request->all());*/
         /*dd($request->points_inspection[0]);*/
          DB::beginTransaction();
 
-        $inspection = (new Inspection)->fill($request->all());
-        $inspection->save();
+        $maintenance = (new Maintenance)->fill($request->all());
+        $maintenance->save();
 
         $points = InspectionPoint::where('inactive_at', null)
-                                ->where('type', 'TRUCK & TRAILER')->get();
+                                ->where('type', 'TRUCK')->get();
 
         /*dd($points[0]['id']);*/
 
         for ($i=0; $i < count($points); $i++) 
         { 
             DB::table('assigned_points')->insert([
-                'inspection_id' => $inspection->id, 
+                'maintenance_id' => $maintenance->id, 
                 'point_id' => $points[$i]['id'], 
-                'value' => $request->points_inspection[$i]
+                'value' => $request->point_truck[$i]
+            ]);
+        }
+
+        $points = InspectionPoint::where('inactive_at', null)
+                                ->where('type', 'TRAILER')->get();
+
+
+        for ($i=0; $i < count($points); $i++) 
+        { 
+            DB::table('assigned_points')->insert([
+                'maintenance_id' => $maintenance->id, 
+                'point_id' => $points[$i]['id'], 
+                'value' => $request->point_trailer[$i]
             ]);
         }
 
 
-        if($inspection){
+        if($maintenance){
             DB::commit();
-            return back()->with('success', 'La inspección se ha registrado correctamente.');
+            return back()->with('success', 'El mantenimiento se ha registrado correctamente.');
         }else{
             DB::rollBack();
-            return back()->with('error', 'Ocurrió un problema al registrar la inspección.');
+            return back()->with('error', 'Ocurrió un problema al registrar el mantenimiento.');
         }
     }
 
@@ -73,7 +87,7 @@ class InspectionController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+     
     public function show($id)
     {
         //

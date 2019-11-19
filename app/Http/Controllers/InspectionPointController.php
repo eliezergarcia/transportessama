@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Box;
 use App\Driver;
+use App\Mechanic;
 use App\Coordinator;
 use App\InspectionPoint;
 use Illuminate\Http\Request;
@@ -23,8 +24,20 @@ class InspectionPointController extends Controller
     public function list()
     {
         $points = InspectionPoint::where('inactive_at', null)->get();
+        $boxes = Box::with(['type', 'brand'])->get();
+        $drivers = Driver::where('inactive_at', null)->get();
+        $coordinators = Coordinator::where('inactive_at', null)->get();
+        $mechanics = Mechanic::where('inactive_at', null)->get();
 
-        return $points;
+        $data = [
+            'points' => $points,
+            'boxes' => $boxes,
+            'drivers' => $drivers,
+            'coordinators' => $coordinators,
+            'mechanics' => $mechanics,
+        ];
+
+        return $data;
     }
 
     public function listTTI()

@@ -15,7 +15,8 @@ class CreateAssignedPointsTable extends Migration
     {
         Schema::create('assigned_points', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('inspection_id')->unsigned();
+            $table->integer('inspection_id')->unsigned()->nullable();
+            $table->integer('maintenance_id')->unsigned()->nullable();
             $table->integer('point_id')->unsigned();
             $table->integer('value')->unsigned();
             $table->timestamps();

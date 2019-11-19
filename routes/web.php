@@ -46,3 +46,4 @@ Route::get('/cajas/buscarPlacas/{id}', 'BoxController@findPlates')->name('cajas.
 Route::resource('cajas', 'BoxController');
 
 Route::resource('inspecciones', 'InspectionController');
+Route::resource('mantenimientos', 'MaintenanceController');

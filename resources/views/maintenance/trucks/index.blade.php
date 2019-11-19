@@ -169,7 +169,7 @@
 												<i class="kt-nav__link-icon flaticon-clipboard"></i> 
 												<span class="kt-nav__link-text">Inspección diario</span>
 											</a>
-											<a class="dropdown-item" href="#" @click="showDailyInspectionModal(truck)">
+											<a class="dropdown-item" href="#" @click="showMantenimientoPreventivoModal(truck)">
 												<i class="flaticon-clipboard"></i> 
 												Matenimiento Preventivo
 											</a>
@@ -305,254 +305,296 @@
     </div>
     <!-- Fin de Modal Crear Tractor -->
 
-    <!-- Modal Daily Inspection -->
-    <div class="modal fade" id="dailyInspectionModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="mediumModalLabel">Mantenimiento Preventivo</h5>
-                    <button type="button" class="close" @click="closeDailyInspectionModal()" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group row">
-                    	<div class="col-lg-6">
-	                        <label for="name" class=" form-control-label">Fecha</label>
-	                        <input type="text" name="name" placeholder="Ingrese la fecha..." class="form-control">
-                    	</div>
-                    	<div class="col-lg-6">
-	                        <label for="last_name" class=" form-control-label">Nombre del chofer</label>
-	                        <input type="text" name="last_name" placeholder="Ingrese el nombre del chofer..." class="form-control">
-                    	</div>
-                    </div>
-                    <!-- <div class="form-group row">
-                    	<div class="col-lg-4">
-                    		<div class="form-grou row">
-                    			<div class="col-lg-4">
-                    				<select class="form-control kt_selectpicker">
-										<option value="1">
-											<a class="btn btn-sm btn-clean btn-icon btn-icon-sm">
-												<i class="flaticon2-check-mark"></i>
-											</a>
+    <!-- Modal Mantenimiento Preventivo -->
+    <div class="modal fade" id="mantenimientoPreventivoModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+    	<form method="POST" id="mantenimientoPreventivoForm" action="{{ route('mantenimientos.store') }}" class="kt-form kt-form--label-right">				
+			{!! csrf_field() !!}
+			<input type="hidden" name="truck_id" id="truck_id">
+	        <div class="modal-dialog modal-lg" role="document">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <h5 class="modal-title" id="mediumModalLabel">Mantenimiento Preventivo</h5>
+	                    <button type="button" class="close" @click="closeMantenimientoPreventivoModal()" aria-label="Close">
+	                        <span aria-hidden="true">&times;</span>
+	                    </button>
+	                </div>
+	                <div class="modal-body">
+	                    <div class="form-group row">
+	                    	<div class="col-lg-6">
+		                        <label for="name" class=" form-control-label">Fecha <span class="text-danger">*</span></label>
+		                        <input type="date" name="date" placeholder="Ingrese la fecha..." class="form-control form-control-sm" required>
+		                        <span class="form-text text-muted">Porfavor ingrese la fecha</span>
+	                    	</div>
+	                    	<div class="col-lg-6">
+		                        <label for="last_name" class=" form-control-label">Nombre del chofer <span class="text-danger">*</span></label>
+		                        <select class="form-control form-control-sm" name="driver_id" id="driver_id" @change="findPlates()" required>
+									<option v-for="driver in drivers" 
+											:value="driver.id"
+											v-text="driver.first_name">
+									</option>
+									<option selected>Seleccionar...</option>
+								</select>
+								<span class="form-text text-muted">Porfavor seleccione el chofer</span>
+	                    	</div>
+	                    </div>
+	                    <!-- <div class="form-group row">
+	                    	<div class="col-lg-4">
+	                    		<div class="form-grou row">
+	                    			<div class="col-lg-4">
+	                    				<select class="form-control kt_selectpicker">
+											<option value="1">
+												<a class="btn btn-sm btn-clean btn-icon btn-icon-sm">
+													<i class="flaticon2-check-mark"></i>
+												</a>
+											</option>
+										</select>
+	                    			</div>
+	                    			<label for="example-text-input" class="col-8 col-form-label">Full Name:</label>
+	                    		</div>
+	                    	</div>
+	                    	<div class="col-lg-4">
+	                    		<div class="form-grou row">
+	                    			<div class="col-lg-4">
+	                    				<select class="form-control">
+											<option></option>
+										</select>
+	                    			</div>
+	                    			<label for="example-text-input" class="col-8 col-form-label">Full Name:</label>
+	                    		</div>
+	                    	</div>
+	                    	<div class="col-lg-4">
+	                    		<div class="form-grou row">
+	                    			<div class="col-lg-4">
+	                    				<select class="form-control">
+											<option></option>
+										</select>
+	                    			</div>
+	                    			<label for="example-text-input" class="col-8 col-form-label">Full Name:</label>
+	                    		</div>
+	                    	</div>
+	                    </div> -->
+	                   <!--  <table class="table table-head-noborder table-sm">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>
+										<a class="btn btn-outline-success btn-elevate btn-circle btn-icon btn-sm">
+											<i class="flaticon2-check-mark"></i>
+										</a>
+									</th>
+									<th>
+										<a class="btn btn-outline-danger btn-elevate btn-circle btn-icon btn-sm">
+											<i class="flaticon2-delete"></i>
+										</a>
+									</th>
+									<th>
+										<a class="btn btn-outline-info btn-elevate btn-circle btn-icon btn-sm">
+											<i class="flaticon2-line"></i>
+										</a>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="inspectionPoint in inspectionPoints" v-if="inspectionPoint.type === 'TRUCK'">
+									<div>
+										<td scope="row" v-text="inspectionPoint.point_name"></td>
+										<td>
+											<label class="kt-radio kt-radio--tick kt-radio--success">
+												<input type="radio" :name="inspectionPoint.id" value="1"> <br>
+												<span></span>
+											</label>
+										</td>
+										<td>
+											<label class="kt-radio kt-radio--tick kt-radio--danger">
+												<input type="radio" :name="inspectionPoint.id" value="2"> <br>
+												<span></span>
+											</label>
+										</td>
+										<td>
+											<label class="kt-radio kt-radio--tick kt-radio--info">
+												<input type="radio" :name="inspectionPoint.id" value="3"> <br>
+												<span></span>
+											</label>
+										</td>
+									</div>
+								</tr>
+							</tbody>
+						</table> -->
+						<div class="form-group row">
+	                    	<div v-for="(inspectionPoint, index) in inspectionPoints" v-if="inspectionPoint.type === 'TRUCK'" class="col-lg-4">
+	                    		<div class="form-group row">
+		                    		<div class="col-lg-7">
+		                    			<select class="form-control form-control-sm" name="point_truck[]" id="point_truck" required>
+		                    				<option value="" selected>Selecciona...</option>
+											<option value="1">Buen estado</option>
+											<option value="2">Mal estado</option>
+											<option value="3">No aplica</option>
+										</select>
+		                    		</div>                    		
+									<div class="col-lg-5 col-form-label">
+			                        	<label for="point_truck" class=" form-control-label">
+			                        		@{{ inspectionPoint.point_name }}
+			                        	</label>
+		                    		</div>
+	                    		</div>
+	                    	</div>
+	                    </div>
+	                    <div class="form-group row">
+	                    	<div class="col-lg-6">
+		                        <label for="email" class=" form-control-label">Número de caja <span class="text-danger">*</span></label>
+		                        <select class="form-control form-control-sm" name="box_id" id="trailer_number" required>
+										<option selected>Seleccionar...</option>
+										<option v-for="box in boxes" 
+												:value="box.id"
+												v-text="box.trailer">
 										</option>
 									</select>
-                    			</div>
-                    			<label for="example-text-input" class="col-8 col-form-label">Full Name:</label>
-                    		</div>
-                    	</div>
-                    	<div class="col-lg-4">
-                    		<div class="form-grou row">
-                    			<div class="col-lg-4">
-                    				<select class="form-control">
-										<option></option>
-									</select>
-                    			</div>
-                    			<label for="example-text-input" class="col-8 col-form-label">Full Name:</label>
-                    		</div>
-                    	</div>
-                    	<div class="col-lg-4">
-                    		<div class="form-grou row">
-                    			<div class="col-lg-4">
-                    				<select class="form-control">
-										<option></option>
-									</select>
-                    			</div>
-                    			<label for="example-text-input" class="col-8 col-form-label">Full Name:</label>
-                    		</div>
-                    	</div>
-                    </div> -->
-                   <!--  <table class="table table-head-noborder table-sm">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>
-									<a class="btn btn-outline-success btn-elevate btn-circle btn-icon btn-sm">
-										<i class="flaticon2-check-mark"></i>
-									</a>
-								</th>
-								<th>
-									<a class="btn btn-outline-danger btn-elevate btn-circle btn-icon btn-sm">
-										<i class="flaticon2-delete"></i>
-									</a>
-								</th>
-								<th>
-									<a class="btn btn-outline-info btn-elevate btn-circle btn-icon btn-sm">
-										<i class="flaticon2-line"></i>
-									</a>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="inspectionPoint in inspectionPoints" v-if="inspectionPoint.type === 'TRUCK'">
-								<div>
-									<td scope="row" v-text="inspectionPoint.point_name"></td>
-									<td>
-										<label class="kt-radio kt-radio--tick kt-radio--success">
-											<input type="radio" :name="inspectionPoint.id" value="1"> <br>
-											<span></span>
-										</label>
-									</td>
-									<td>
-										<label class="kt-radio kt-radio--tick kt-radio--danger">
-											<input type="radio" :name="inspectionPoint.id" value="2"> <br>
-											<span></span>
-										</label>
-									</td>
-									<td>
-										<label class="kt-radio kt-radio--tick kt-radio--info">
-											<input type="radio" :name="inspectionPoint.id" value="3"> <br>
-											<span></span>
-										</label>
-									</td>
-								</div>
-							</tr>
-						</tbody>
-					</table> -->
-					<div class="form-group row">
-                    	<div v-for="(inspectionPoint, index) in inspectionPoints" v-if="inspectionPoint.type === 'TRUCK'" class="col-lg-4">
-                    		<div class="form-group row">
-	                    		<div class="col-lg-7">
-	                    			<select class="form-control form-control-sm" name="point_inspection_value" id="point_inspection_value">
-										<option value="1">Buen estado</option>
-										<option value="2">Mal estado</option>
-										<option value="3">No aplica</option>
-									</select>
-	                    		</div>                    		
-								<div class="col-lg-5 col-form-label">
-		                        	<label for="trailer_plates" class=" form-control-label">
-		                        		@{{ inspectionPoint.point_name }}
-		                        	</label>
-	                    		</div>
-                    		</div>
-                    	</div>
-                    </div>
-                    <div class="form-group row">
-                    	<div class="col-lg-6">
-	                        <label for="email" class=" form-control-label">Número de caja</label>
-	                        <input type="text" name="email" placeholder="Ingrese el número de caja..." class="form-control">
+									<span class="form-text text-muted">Porfavor selecciona la caja</span>
+		                    </div>
 	                    </div>
-                    </div>
-                    <!-- <table class="table table-head-noborder table-sm">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>
-									<a class="btn btn-outline-success btn-elevate btn-circle btn-icon btn-sm">
-										<i class="flaticon2-check-mark"></i>
-									</a>
-								</th>
-								<th>
-									<a class="btn btn-outline-danger btn-elevate btn-circle btn-icon btn-sm">
-										<i class="flaticon2-delete"></i>
-									</a>
-								</th>
-								<th>
-									<a class="btn btn-outline-info btn-elevate btn-circle btn-icon btn-sm">
-										<i class="flaticon2-line"></i>
-									</a>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="inspectionPoint in inspectionPoints" v-if="inspectionPoint.type === 'CAJA'">
-								<div>
-									<td scope="row" v-text="inspectionPoint.point_name"></td>
-									<td>
-										<label class="kt-radio kt-radio--tick kt-radio--success">
-											<input type="radio" :name="inspectionPoint.id" value="1"> <br>
-											<span></span>
-										</label>
-									</td>
-									<td>
-										<label class="kt-radio kt-radio--tick kt-radio--danger">
-											<input type="radio" :name="inspectionPoint.id" value="2"> <br>
-											<span></span>
-										</label>
-									</td>
-									<td>
-										<label class="kt-radio kt-radio--tick kt-radio--info">
-											<input type="radio" :name="inspectionPoint.id" value="3"> <br>
-											<span></span>
-										</label>
-									</td>
-								</div>
-							</tr>
-						</tbody>
-					</table> -->
-					<div class="form-group row">
-                    	<div v-for="(inspectionPoint, index) in inspectionPoints" v-if="inspectionPoint.type === 'TRAILER'" class="col-lg-4">
-                    		<div class="form-group row">
-	                    		<div class="col-lg-7">
-	                    			<select class="form-control form-control-sm" name="point_inspection_value" id="point_inspection_value">
-										<option value="1">Buen estado</option>
-										<option value="2">Mal estado</option>
-										<option value="3">No aplica</option>
-									</select>
-	                    		</div>                    		
-								<div class="col-lg-5 col-form-label">
-		                        	<label for="trailer_plates" class=" form-control-label">
-		                        		@{{ inspectionPoint.point_name }}
-		                        	</label>
+	                    <!-- <table class="table table-head-noborder table-sm">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>
+										<a class="btn btn-outline-success btn-elevate btn-circle btn-icon btn-sm">
+											<i class="flaticon2-check-mark"></i>
+										</a>
+									</th>
+									<th>
+										<a class="btn btn-outline-danger btn-elevate btn-circle btn-icon btn-sm">
+											<i class="flaticon2-delete"></i>
+										</a>
+									</th>
+									<th>
+										<a class="btn btn-outline-info btn-elevate btn-circle btn-icon btn-sm">
+											<i class="flaticon2-line"></i>
+										</a>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="inspectionPoint in inspectionPoints" v-if="inspectionPoint.type === 'CAJA'">
+									<div>
+										<td scope="row" v-text="inspectionPoint.point_name"></td>
+										<td>
+											<label class="kt-radio kt-radio--tick kt-radio--success">
+												<input type="radio" :name="inspectionPoint.id" value="1"> <br>
+												<span></span>
+											</label>
+										</td>
+										<td>
+											<label class="kt-radio kt-radio--tick kt-radio--danger">
+												<input type="radio" :name="inspectionPoint.id" value="2"> <br>
+												<span></span>
+											</label>
+										</td>
+										<td>
+											<label class="kt-radio kt-radio--tick kt-radio--info">
+												<input type="radio" :name="inspectionPoint.id" value="3"> <br>
+												<span></span>
+											</label>
+										</td>
+									</div>
+								</tr>
+							</tbody>
+						</table> -->
+						<div class="form-group row">
+	                    	<div v-for="(inspectionPoint, index) in inspectionPoints" v-if="inspectionPoint.type === 'TRAILER'" class="col-lg-4">
+	                    		<div class="form-group row">
+		                    		<div class="col-lg-7">
+		                    			<select class="form-control form-control-sm" name="point_trailer[]" id="point_inspection_value" required>
+		                    				<option value="" selected>Selecciona...</option>
+											<option value="1">Buen estado</option>
+											<option value="2">Mal estado</option>
+											<option value="3">No aplica</option>
+										</select>
+		                    		</div>                    		
+									<div class="col-lg-5 col-form-label">
+			                        	<label for="" class=" form-control-label">
+			                        		@{{ inspectionPoint.point_name }}
+			                        	</label>
+		                    		</div>
 	                    		</div>
-                    		</div>
-                    	</div>
-                    </div>
-                    <div class="form-group row">
-                		<div class="col-lg-3">
-                			<select class="form-control form-control-sm" name="" id="">
-								<option value="1">Buen estado</option>
-								<option value="2">Mal estado</option>
-								<option value="3">No aplica</option>
-							</select>
-                		</div>                    		
-						<div class="col-lg-9 col-form-label">
-                        	<label for="" class=" form-control-label">
-                        		Las condiciones anteriores del vehículo son satisfactorias
-                        	</label>
-                		</div>
-            		</div>
-            		<div class="form-group row">
-                    	<div class="col-lg-6">
-	                        <label for="firm_conductor" class=" form-control-label">Firma de conductor</label>
-	                        <input type="firm_conductor" name="firm_conductor" placeholder="Ingrese la firma..." class="form-control">
-                    	</div>
-                    </div>
-                    <div class="form-group row">
-                		<div class="col-lg-3">
-                			<select class="form-control form-control-sm" name="" id="">
-								<option value="1">Buen estado</option>
-								<option value="2">Mal estado</option>
-								<option value="3">No aplica</option>
-							</select>
-                		</div>                    		
-						<div class="col-lg-9 col-form-label">
-                        	<label for="" class=" form-control-label">
-                        		Los defectos de arriba fueron corregidos
-                        	</label>
-                		</div>
-            		</div>
-                    <div class="form-group row">
-                    	<div class="col-lg-6">
-	                        <label for="firm_coordinator" class=" form-control-label">Firma de coordinador Sama</label>
-	                        <input type="firm_coordinator" name="firm_coordinator" placeholder="Ingrese la firma..." class="form-control">
-                    	</div>
-                    </div>
-                    <div class="form-group">
-                    	<div class="col-lg-6">
-                        	<label for="firm_guard" class=" form-control-label">Firma de guardia Sama</label>
-                        	<input type="firm_guard" name="firm_guard" placeholder="Ingrese la firma..." class="form-control">
-                    	</div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-brand" @click="closeDailyInspectionModal()">Cerrar</button>
-                    <button type="button" class="btn btn-brand" @click="createDailyInspection()">Guardar</button>
-                </div>
-            </div>
-        </div>
+	                    	</div>
+	                    </div>
+	                    <div class="form-group row">
+	                		<div class="col-lg-3">
+	                			<select class="form-control form-control-sm" name="vehicle_conditions" id="">
+	                				<option value="" selected> Selecciona...</option>
+									<option value="1">Buen estado</option>
+									<option value="2">Mal estado</option>
+									<option value="3">No aplica</option>
+								</select>
+	                		</div>                    		
+							<div class="col-lg-9 col-form-label">
+	                        	<label for="" class=" form-control-label">
+	                        		Las condiciones anteriores del vehículo son satisfactorias
+	                        	</label>
+	                		</div>
+	            		</div>
+	            		<div class="form-group row">
+	                    	<div class="col-lg-6">
+		                        <label for="firm_conductor" class=" form-control-label">Conductor <span class="text-danger">*</span></label>
+		                        <select class="form-control form-control-sm" name="firm_conductor" id="firm_conductor" @change="findPlates()" required>
+									<option v-for="driver in drivers" 
+											:value="driver.id"
+											v-text="driver.first_name">
+									</option>
+									<option selected>Seleccionar...</option>
+								</select>
+		                        <span class="form-text text-muted">Porfavor selecciona el conductor</span>
+	                    	</div>
+	                    </div>
+	                    <div class="form-group row">
+	                		<div class="col-lg-3">
+	                			<select class="form-control form-control-sm" name="defect_correcteds" id="">
+	                				<option value="" selected> Selecciona...</option>
+									<option value="1">Buen estado</option>
+									<option value="2">Mal estado</option>
+									<option value="3">No aplica</option>
+								</select>
+	                		</div>                    		
+							<div class="col-lg-9 col-form-label">
+	                        	<label for="" class=" form-control-label">
+	                        		Los defectos de arriba fueron corregidos
+	                        	</label>
+	                		</div>
+	            		</div>
+	                    <div class="form-group row">
+	                    	<div class="col-lg-6">
+	                        	<label for="firm_mechanic" class=" form-control-label">Mecánico Sama <span class="text-danger">*</span></label>
+	                        	<select class="form-control form-control-sm" name="firm_mechanic" id="firm_mechanic" @change="findPlates()" required>
+									<option selected>Seleccionar...</option>
+									<option v-for="mechanic in mechanics" 
+											:value="mechanic.id"
+											v-text="mechanic.first_name">
+									</option>
+								</select>
+	                        	<span class="form-text text-muted">Porfavor selecciona el mecánico</span>
+	                    	</div>
+	                    	<div class="col-lg-6">
+		                        <label for="firm_coordinator" class=" form-control-label">Coordinador Sama <span class="text-danger">*</span></label>
+		                        <select class="form-control form-control-sm" name="firm_coordinator" id="firm_coordinator" @change="findPlates()" required>
+									<option selected>Seleccionar...</option>
+									<option v-for="coordinator in coordinators" 
+											:value="coordinator.id"
+											v-text="coordinator.first_name">
+									</option>
+								</select>
+		                        <span class="form-text text-muted">Porfavor selecciona el coordinador</span>
+	                    	</div>
+	                    </div>
+	                </div>
+	                <div class="modal-footer">
+	                    <button type="button" class="btn btn-outline-brand" @click="closeMantenimientoPreventivoModal()">Cerrar</button>
+	                    <button type="submit" class="btn btn-brand">Guardar</button>
+	                </div>
+	            </div>
+	        </div>
+	    </form>
     </div>
-    <!-- Fin de Modal Daily Inspection -->
+    <!-- Fin de Modal Mantenimiento Preventivo -->
 
     <!-- Modal Inspeccion Diario -->
     <div class="modal fade" id="inspeccionDiarioModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
@@ -597,11 +639,11 @@
 		                        <label for="trailer" class=" form-control-label">Número de caja/Trailer number <span class="text-danger">*</span></label>
 		                        <!-- <input type="text" name="trailer_number" id="trailer_number" placeholder="Ingrese el número de caja/trailer number..." class="form-control form-control-sm"> -->
 		                        <select class="form-control form-control-sm" name="box_id" id="trailer_number" @change="findPlates()" required>
+									<option selected>Seleccionar...</option>
 									<option v-for="box in boxes" 
 											:value="box.id"
 											v-text="box.trailer">
 									</option>
-									<option selected>Seleccionar...</option>
 								</select>
 								<span class="form-text text-muted">Porfavor selecciona la caja</span>
 	                    	</div>
@@ -643,11 +685,11 @@
 		                        <label for="trailer" class=" form-control-label">Conductor/Driver <span class="text-danger">*</span></label>
 		                        <!-- <input type="text" name="trailer_number" id="trailer_number" placeholder="Ingrese el número de caja/trailer number..." class="form-control form-control-sm"> -->
 		                        <select class="form-control form-control-sm" name="driver_id" id="driver_id" @change="findPlates()" required>
+									<option selected>Seleccionar...</option>
 									<option v-for="driver in drivers" 
 											:value="driver.id"
 											v-text="driver.first_name">
 									</option>
-									<option selected>Seleccionar...</option>
 								</select>
 								<span class="form-text text-muted">Porfavor selecciona el conductor</span>
 	                    	</div>
@@ -655,11 +697,11 @@
 		                        <label for="trailer" class=" form-control-label">Coordiandor/Coordinator <span class="text-danger">*</span></label>
 		                        <!-- <input type="text" name="trailer_number" id="trailer_number" placeholder="Ingrese el número de caja/trailer number..." class="form-control form-control-sm"> -->
 		                        <select class="form-control form-control-sm" name="coordinator_id" id="coordinator_id" @change="findPlates()" required>
+									<option selected>Seleccionar...</option>
 									<option v-for="coordinator in coordinators" 
 											:value="coordinator.id"
 											v-text="coordinator.first_name">
 									</option>
-									<option selected>Seleccionar...</option>
 								</select>
 								<span class="form-text text-muted">Porfavor selecciona el coordinador</span>
 	                    	</div>
@@ -857,6 +899,7 @@
 		    	inspectionPoints : [],
 		    	drivers : [],
 		    	coordinators : [],
+		    	mechanics : [],
 		    	id_truck : 0,
 		    	number : '',
 		    	type_id : '',
@@ -982,22 +1025,27 @@
 					$('#createTruckModal').modal('hide');
 					this.listTrucks();
 				},
-		  		showDailyInspectionModal() {
+		  		showMantenimientoPreventivoModal(truck = []) {
 		  			let me = this;
 		  			axios.get(this.base_url + '/puntosInspeccion/listar')
 			      	.then(response => {
 			      		console.log(response.data);
-			      		me.inspectionPoints = response.data;
+			      		me.inspectionPoints = response.data.points;
+			      		me.boxes = response.data.boxes;			      		
+			      		me.drivers = response.data.drivers;
+			      		me.coordinators = response.data.coordinators;
+			      		me.mechanics = response.data.mechanics;
+			      		$("#mantenimientoPreventivoForm #truck_id").val(truck['id']);
 			      	})
 			      	.catch(error => {
 			        	console.log(error)
 			        	this.errored = true
 			      	})
-					$('#dailyInspectionModal').modal('show');
+					$('#mantenimientoPreventivoModal').modal('show');
 				},
-				closeDailyInspectionModal() {
+				closeMantenimientoPreventivoModal() {
 					this.id_truck = 0;
-					$('#dailyInspectionModal').modal('hide');
+					$('#mantenimientoPreventivoModal').modal('hide');
 				},
 				saveTruck() {
 					let me = this;
