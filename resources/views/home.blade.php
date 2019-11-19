@@ -28,9 +28,11 @@
                     <!-- LOGO -->
                     <a href="index.html" class="logo text-center">
                         <span class="logo-lg mt-3">
+                            <!-- <img src="assets/images/logo1.png" alt="" height="80" width="200"> -->
                             <img src="assets/images/logo1.png" alt="" height="80" width="200">
                         </span>
                         <span class="logo-sm">
+                            <!-- <img src="assets/images/logo_sm.png" alt="" height="16"> -->
                             <img src="assets/images/logo_sm.png" alt="" height="16">
                         </span>
                     </a>
