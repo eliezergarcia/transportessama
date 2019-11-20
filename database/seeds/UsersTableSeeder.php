@@ -38,6 +38,19 @@ class UsersTableSeeder extends Seeder
             'birthday_date' => '1995/07/31',
         ]);
 
+        User::create([
+            'first_name' => 'Ernesto',
+            'last_name' => 'Gonzalez',
+            'user_name' => 'ernestogzz',
+            'email' => 'egonzalez@transportessama.com',
+            'role' => 'Administracion',
+            'password' => 'egonzalez',
+            'password_encrypted' => 'egonzalez',
+            'avatar' => '',
+            'contact_phone' => '8129368475',
+            'birthday_date' => '1995/07/31',
+        ]);
+
     }
 }
 
