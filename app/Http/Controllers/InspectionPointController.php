@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Box;
+use App\Truck;
 use App\Driver;
 use App\Mechanic;
 use App\Coordinator;
@@ -25,6 +26,7 @@ class InspectionPointController extends Controller
     {
         $points = InspectionPoint::where('inactive_at', null)->get();
         $boxes = Box::with(['type', 'brand'])->get();
+        $trucks = Truck::with(['type', 'brand', 'service', 'owner'])->get();
         $drivers = Driver::where('inactive_at', null)->get();
         $coordinators = Coordinator::where('inactive_at', null)->get();
         $mechanics = Mechanic::where('inactive_at', null)->get();
@@ -32,6 +34,7 @@ class InspectionPointController extends Controller
         $data = [
             'points' => $points,
             'boxes' => $boxes,
+            'trucks' => $trucks,
             'drivers' => $drivers,
             'coordinators' => $coordinators,
             'mechanics' => $mechanics,
@@ -46,12 +49,14 @@ class InspectionPointController extends Controller
                                 ->where('type', 'TRUCK & TRAILER')->get();
 
         $boxes = Box::with(['type', 'brand'])->get();
+        $trucks = Truck::with(['type', 'brand', 'service', 'owner'])->get();
         $drivers = Driver::where('inactive_at', null)->get();
         $coordinators = Coordinator::where('inactive_at', null)->get();
 
         $data = [
             'points' => $points,
             'boxes' => $boxes,
+            'trucks' => $trucks,
             'drivers' => $drivers,
             'coordinators' => $coordinators,
         ];

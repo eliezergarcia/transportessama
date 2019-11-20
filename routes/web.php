@@ -31,6 +31,7 @@ Route::post('/tractores/activar/{id}', 'TruckController@activate')->name('tracto
 Route::delete('/tractores/desactivar/{id}', 'TruckController@deactivate')->name('tractores.deactivate');
 Route::get('/tractores/relacionesCrear', 'TruckController@relationsCreate')->name('tractores.relationsCreate');
 Route::get('/tractores/relaciones/{id}', 'TruckController@relations')->name('tractores.relations');
+Route::get('/tractores/buscarPlacas/{id}', 'TruckController@findPlates')->name('tractores.findPlates');
 Route::resource('tractores', 'TruckController');
 
 Route::get('/puntosInspeccion/listar', 'InspectionPointController@list')->name('puntosInspeccion.list');

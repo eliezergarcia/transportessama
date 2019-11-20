@@ -32,6 +32,13 @@ class TruckController extends Controller
         return $trucks;
     }
 
+    public function findPlates(Request $request, $id)
+    {
+        $truck = Truck::where('id', $id)->with(['type', 'brand', 'service', 'owner'])->get();
+
+        return $truck;
+    }
+
     public function relations(Request $request, $id)
     {
         $truck = Truck::where('id', $id)->with(['type', 'brand', 'service', 'owner'])->get();

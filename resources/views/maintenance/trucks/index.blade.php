@@ -148,7 +148,7 @@
 										<div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(31px, 32px, 0px);">
 											<!-- <a class="dropdown-item" href="#" @click="showEditModal(truck)"><i class="la la-edit"></i> Editar información</a> -->
 											<a class="dropdown-item" href="#" @click="showActivateModal(truck)"><i class="la la-leaf"></i> Activar tractor</a>
-											<a class="dropdown-item" href="#"><i class="la la-print"></i> Generar reporte</a>
+											<!-- <a class="dropdown-item" href="#"><i class="la la-print"></i> Generar reporte</a> -->
 											<!-- <div class="dropdown-divider"></div>
 											<a class="dropdown-item" href="#"><i class="la la-cog"></i> Settings</a> -->
 										</div>
@@ -182,11 +182,11 @@
 												<i class="la la-leaf"></i> 
 												Desactivar tractor
 											</a>
-											<div class="dropdown-divider"></div>
+											<!-- <div class="dropdown-divider"></div>
 											<a class="dropdown-item" href="#">
 												<i class="la la-print"></i> 
 												Generar reporte
-											</a>
+											</a> -->
 											<!-- <a class="dropdown-item" href="#"><i class="la la-cog"></i> Settings</a> -->
 										</div>
 									</div>
