@@ -20,7 +20,7 @@
 					</ul>
 				</div>
 			</li> -->
-			@if(Auth::user()->role == "Mantenimiento" || Auth::user()->role == "Administracion")
+			
 			<li class="kt-menu__item  kt-menu__item--open kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open {{ activeMenu('tractores') }} {{ activeMenu('cajas') }}" data-ktmenu-submenu-toggle="click" aria-haspopup="true"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Mantenimiento</span><i class="kt-menu__hor-arrow la la-angle-down"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
 				<div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
 					<ul class="kt-menu__subnav">
@@ -29,8 +29,8 @@
 					</ul>
 				</div>
 			</li>
-			@endif
-			@if(Auth::user()->role == "Administracion")
+			
+			
 			<li class="kt-menu__item  kt-menu__item--open kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open {{ activeMenu('usuarios') }}" data-ktmenu-submenu-toggle="click" aria-haspopup="true"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Administración</span><i class="kt-menu__hor-arrow la la-angle-down"></i><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
 				<div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
 					<ul class="kt-menu__subnav">
@@ -38,7 +38,7 @@
 					</ul>
 				</div>
 			</li>
-			@endif
+			
 		</ul>
 	</div>
 </div>
