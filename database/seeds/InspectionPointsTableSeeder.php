@@ -168,6 +168,16 @@ class InspectionPointsTableSeeder extends Seeder
         ]);
 
         InspectionPoint::create([
+            'type' => 'TRUCK',
+            'point_name' => 'CAMBIO DE ACEITE'
+        ]);
+
+        InspectionPoint::create([
+            'type' => 'TRUCK',
+            'point_name' => 'FILTROS'
+        ]);
+
+        InspectionPoint::create([
         	'type' => 'TRUCK',
         	'point_name' => 'OTROS'
         ]);
