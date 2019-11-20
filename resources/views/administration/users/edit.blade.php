@@ -211,7 +211,7 @@
 							<div class="form-group row">
 								<label class="col-xl-3 col-lg-3 col-form-label">Department(s)</label>
 								<div class="col-lg-9 col-xl-6">
-									<input class="form-control" type="text" value="">
+									<input class="form-control" type="text" value="{{ $user->role }}">
 								</div>
 							</div>
 							<div class="row">

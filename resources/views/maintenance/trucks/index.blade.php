@@ -131,7 +131,8 @@
 								</td>							
 								<td v-if="truck.service.id === 3">
 									<span class="kt-badge kt-badge--brand kt-badge--inline" v-text="truck.service.name"></span>
-								</td>								
+								</td>
+								<!-- <td v-text="truckStatus(truck)"></td>								 -->
 								<td v-if="truck.inactive_at">
 									<span class="kt-badge kt-badge--danger kt-badge--dot"></span>
 									<span class="kt-font-bold kt-font-danger">Inactivo</span>
@@ -925,6 +926,17 @@
 		  	computed: {
 		  	},
 			methods: {
+				truckStatus(truck = []){
+					let me = this;
+		  			axios.get(this.base_url + '/tractores/status/' + truck.id)
+			      	.then(response => {
+			      		console.log(response.data);
+			      	})
+			      	.catch(error => {
+			        	console.log(error)
+			        	this.errored = true
+			      	})
+				},
 		  		listTrucks(){
 		  			let me = this;
 		  			axios.get(this.base_url + '/tractores/listar')

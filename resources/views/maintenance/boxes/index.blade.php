@@ -21,7 +21,7 @@
 			<div class="kt-subheader__toolbar">
 				<div class="kt-subheader__toolbar-wrapper">
 					<button type="button" class="btn btn-default btn-sm btn-bold btn-upper" @click="showCreateModal()">Crear</button>
-					<a href="#" class="btn btn-default btn-sm btn-bold btn-upper">Editar</a>
+					<!-- <a href="#" class="btn btn-default btn-sm btn-bold btn-upper">Editar</a> -->
 					<!-- <a href="#" class="btn btn-default btn-sm btn-bold btn-upper">Configuración</a>
 					<div class="dropdown dropdown-inline" data-toggle="kt-tooltip" title="Quick actions" data-placement="top">
 						<a href="#" class="btn btn-icon btn btn-label btn-label-brand btn-bold" data-toggle="dropdown" data-offset="0,5px" aria-haspopup="true" aria-expanded="false">
@@ -155,7 +155,7 @@
 									</div>
 								</td>
 								<td v-else>
-									<a @click="" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver detalles">		
+									<a @click="showBoxInformationModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver detalles">		
 										<i class="flaticon2-expand"></i>						
 									</a>
 									<div class="dropdown dropdown-inline">
@@ -170,6 +170,10 @@
 											<a class="dropdown-item" href="#" @click="showMantenimientoPreventivoModal(box)">
 												<i class="flaticon-clipboard"></i> 
 												Matenimiento Preventivo
+											</a>
+											<a class="dropdown-item" href="#" @click="showMovimientoModal(box)">
+												<i class="flaticon-clipboard"></i> 
+												Generar movimiento
 											</a>
 											<div class="dropdown-divider"></div>
 											<a class="dropdown-item" href="#" @click="showEditModal(box)"><i class="la la-edit"></i> Editar información</a>
@@ -447,6 +451,7 @@
     <div class="modal fade" id="mantenimientoPreventivoModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
     	<form method="POST" id="mantenimientoPreventivoForm" action="{{ route('mantenimientos.store') }}" class="kt-form kt-form--label-right">				
 			{!! csrf_field() !!}
+			<input type="hidden" name="box_id" id="box_id">
 			<input type="hidden" name="truck_id" id="truck_id">
 	        <div class="modal-dialog modal-lg" role="document">
 	            <div class="modal-content">
@@ -473,6 +478,19 @@
 									<option selected>Seleccionar...</option>
 								</select>
 								<span class="form-text text-muted">Porfavor seleccione el chofer</span>
+	                    	</div>
+	                    </div>
+	                    <div class="form-group row">
+	                    	<div class="col-lg-6">
+		                        <label for="unit_number" class=" form-control-label">Número de unidad/Unit number <span class="text-danger">*</span></label>
+		                        <select class="form-control form-control-sm" name="truck_id" id="unit_number" @change="findPlates()" required>
+									<option selected>Seleccionar...</option>
+									<option v-for="truck in trucks" 
+											:value="truck.id"
+											v-text="truck.number">
+									</option>
+								</select>
+		                        <span class="form-text text-muted">Porfavor selecciona el número de unidad</span>
 	                    	</div>
 	                    </div>
 	                    <!-- <div class="form-group row">
@@ -580,14 +598,15 @@
 	                    <div class="form-group row">
 	                    	<div class="col-lg-6">
 		                        <label for="email" class=" form-control-label">Número de caja <span class="text-danger">*</span></label>
-		                        <select class="form-control form-control-sm" name="box_id" id="box_id" required>
-										<option selected>Seleccionar...</option>
-										<option v-for="box in boxes" 
-												:value="box.id"
-												v-text="box.trailer">
-										</option>
-									</select>
-									<span class="form-text text-muted">Porfavor selecciona la caja</span>
+		                        <input type="text" class="form-control form-control-sm" name="trailer_number" id="trailer_number" required>
+		                        <!-- <select class="form-control form-control-sm" name="box_id" id="box_id" required>
+									<option selected>Seleccionar...</option>
+									<option v-for="box in boxes" 
+											:value="box.id"
+											v-text="box.trailer">
+									</option>
+								</select> -->
+								<span class="form-text text-muted">Porfavor selecciona la caja</span>
 		                    </div>
 	                    </div>
 	                    <!-- <table class="table table-head-noborder table-sm">
@@ -994,6 +1013,36 @@
           <div class="modal-footer">
             <button type="button" @click="closeDeactivateModal()" class="btn btn-outline-danger">Cerrar</button>
             <button type="button" class="btn btn-danger" @click="deactivateBox()">Desactivar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin del Modal Desactivar Usuario -->
+
+    <!-- Modal Generar Movimiento -->
+    <div class="modal fade" id="movimientoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Generar movimiento de caja</h5>
+            <button type="button" class="close" @click="closeMovimientoModal()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="py-3 text-center">
+                <i class="fas fa-exclamation-circle fa-4x"></i>
+                <h4 class="heading mt-4">Estás seguro?</h4>
+                <p>
+                    Se generará un movimiento de caja (ida o vuelta)
+                </p>
+            </div>
+            <input type="hidden" v-model="id_box">
+            <input type="hidden" v-model="method_field" name="_method" value="DELETE">
+          </div>
+          <div class="modal-footer">
+            <button type="button" @click="closeMovimientoModal()" class="btn btn-outline-info">Cerrar</button>
+            <button type="button" class="btn btn-info" @click="movimientoBox()">Generar</button>
           </div>
         </div>
       </div>
@@ -1415,17 +1464,19 @@
 				closeInspeccionDiarioModal() {
 		  			$('#inspeccionDiarioModal').modal('hide');
 				},
-				showMantenimientoPreventivoModal(truck = []) {
+				showMantenimientoPreventivoModal(box = []) {
 		  			let me = this;
 		  			axios.get(this.base_url + '/puntosInspeccion/listar')
 			      	.then(response => {
 			      		console.log(response.data);
 			      		me.inspectionPoints = response.data.points;
 			      		me.boxes = response.data.boxes;			      		
+			      		me.trucks = response.data.trucks;			      		
 			      		me.drivers = response.data.drivers;
 			      		me.coordinators = response.data.coordinators;
 			      		me.mechanics = response.data.mechanics;
-			      		$("#mantenimientoPreventivoForm #truck_id").val(truck['id']);
+			      		$("#mantenimientoPreventivoForm #box_id").val(box['id']);
+			      		$("#mantenimientoPreventivoForm #trailer_number").val(box['trailer']);
 			      	})
 			      	.catch(error => {
 			        	console.log(error)
@@ -1437,6 +1488,71 @@
 					this.id_truck = 0;
 					$('#mantenimientoPreventivoModal').modal('hide');
 				},
+				movimientoBox() {
+					let me = this;
+					axios.post(this.base_url + '/cajas/movimientos/' + this.id_box, {
+						id_box: this.id_box,
+						_method: "POST",
+					})
+				  	.then(function (response) {
+					    console.log(response);
+					    me.closeMovimientoModal();
+					    me.listBoxes();
+					    toastr.options = {
+						  "closeButton": true,
+						  "debug": true,
+						  "newestOnTop": true,
+						  "progressBar": true,
+						  "positionClass": "toast-top-right",
+						  "preventDuplicates": true,
+						  "showDuration": "300",
+						  "hideDuration": "1000",
+						  "timeOut": "5000",
+						  "extendedTimeOut": "1000",
+						  "showEasing": "swing",
+						  "hideEasing": "linear",
+						  "showMethod": "fadeIn",
+						  "hideMethod": "fadeOut"
+						};
+
+						toastr.success("Se generó el movimiento correctamente.", "Correcto");
+					})
+					.catch(function (error) {
+					    console.log(error);
+					    me.closeMovimientoModal();
+					    me.listBoxes();
+					    toastr.options = {
+						  "closeButton": true,
+						  "debug": true,
+						  "newestOnTop": true,
+						  "progressBar": true,
+						  "positionClass": "toast-top-right",
+						  "preventDuplicates": true,
+						  "showDuration": "300",
+						  "hideDuration": "1000",
+						  "timeOut": "5000",
+						  "extendedTimeOut": "1000",
+						  "showEasing": "swing",
+						  "hideEasing": "linear",
+						  "showMethod": "fadeIn",
+						  "hideMethod": "fadeOut"
+						};
+
+						toastr.error("Ocurrió un problema al generar el movimiento.", "Incorrecto");
+					});
+				},
+				showMovimientoModal(box = []) {
+					this.id_box = box['id'];
+					$('#movimientoModal').modal('show');
+				},
+				closeMovimientoModal() {
+					this.id_box = 0;
+					$('#movimientoModal').modal('hide');
+				},
+				showBoxInformationModal(box = []){
+					this.id_box = box['id'];
+					window.location = this.base_url + '/cajas/' + this.id_box;
+				}
 			},
 			mounted() {
 			    this.listBoxes();

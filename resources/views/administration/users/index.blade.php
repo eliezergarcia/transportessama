@@ -21,7 +21,7 @@
 			<div class="kt-subheader__toolbar">
 				<div class="kt-subheader__toolbar-wrapper">
 					<button type="button" class="btn btn-default btn-sm btn-bold btn-upper" @click="showCreateModal()">Crear</button>
-					<a href="#" class="btn btn-default btn-sm btn-bold btn-upper">Editar</a>
+					<!-- <a href="#" class="btn btn-default btn-sm btn-bold btn-upper">Editar</a> -->
 					<!-- <a href="#" class="btn btn-default btn-sm btn-bold btn-upper">Configuración</a>
 					<div class="dropdown dropdown-inline" data-toggle="kt-tooltip" title="Quick actions" data-placement="top">
 						<a href="#" class="btn btn-icon btn btn-label btn-label-brand btn-bold" data-toggle="dropdown" data-offset="0,5px" aria-haspopup="true" aria-expanded="false">
@@ -104,6 +104,7 @@
 								<th>First Name</th>
 								<th>Last Name</th>
 								<th>Email</th>
+								<th>Departamento</th>
 								<th>Status</th>
 								<th>Accciones</th>
 							</tr>
@@ -122,13 +123,14 @@
 								<td v-text="user.first_name"></td>
 								<td v-text="user.last_name"></td>
 								<td v-text="user.email"></td>
+								<td v-text="user.role"></td>
 								<td v-if="user.inactive_at">
 									<!-- <span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill">Inactivo</span> -->
-									<span class="btn btn-bold btn-sm btn-font-sm  btn-label-danger">Inactivo</span>
+									<span class="btn btn-bold btn-sm btn-font-sm btn-label-danger">Inactivo</span>
 								</td>
 								<td v-else>
 									<!-- <span class="kt-badge kt-badge--brand kt-badge--inline kt-badge--pill">Activo</span> -->
-									<span class="btn btn-bold btn-sm btn-font-sm  btn-label-success">Activo</span>
+									<span class="btn btn-bold btn-sm btn-font-sm btn-label-success">Activo</span>
 								</td>
 								<td class="kt-datatable__cell">
 									<span style="overflow: visible; position: relative; width: 110px;">
@@ -184,6 +186,14 @@
                     <div class="form-group">
                         <label for="email" class=" form-control-label">Email</label>
                         <input type="text" v-model="email" name="email" placeholder="Ingrese el email..." class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class=" form-control-label">Departamento</label>
+                        <select name="role" v-model="role" class="form-control">
+                        	<option value="" selected="">Selecciona...</option>
+                        	<option value="Administracion">Administracion</option>
+                        	<option value="Mantenimiento">Mantenimiento</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="password" class=" form-control-label">Password</label>
@@ -310,6 +320,7 @@
 		    	first_name : '',
 		    	last_name : '',
 		    	email : '',
+		    	role : '',
 		    	password : '',
 		    	password_encrypted : '',
 		    	method_field : '',
@@ -353,6 +364,7 @@
 					    last_name: this.last_name,
 					    email: this.email,
 					    password: this.password,
+					    role: this.role,
 
 					})
 				  	.then(function (response) {

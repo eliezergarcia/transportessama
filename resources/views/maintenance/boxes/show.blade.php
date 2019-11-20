@@ -10,9 +10,9 @@
 				<div class="kt-subheader__breadcrumbs">
 					<a href="" class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--home">Mantenimiento</a>
 					<span class="kt-subheader__breadcrumbs-separator"></span>
-					<a href="{{ route('tractores.index') }}" class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--home">Tractores</a>
+					<a href="{{ route('cajas.index') }}" class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--home">Cajas</a>
 					<span class="kt-subheader__breadcrumbs-separator"></span>
-					<a href="" class="kt-subheader__breadcrumbs-link ">Información de tractor</a>
+					<a href="" class="kt-subheader__breadcrumbs-link ">Información de caja</a>
 				</div>
 			</div>
 
@@ -90,42 +90,39 @@
 					<div class="kt-widget__wrapper">
 						<div class="kt-widget__label">
 							<a href="#" class="kt-widget__title">
-								{{ $truck->number }}
+								{{ $box->trailer }}
 							</a>
 							<span class="kt-widget__desc">
-								{{ $truck->serie }}
+								{{ $box->serie }}
 							</span>
 						</div>
 						<div class="kt-widget__links">
 							<div class="kt-widget__cont">
 								<div class="kt-widget__link">
-									<span>Número: </span><a href="#">&nbsp;{{ $truck->type->name }}</a>
+									<span>Tipo: </span><a href="#">&nbsp;{{ $box->type->name }}</a>
 								</div>
 								<div class="kt-widget__link">
-									<span>Tipo: </span><a href="#">&nbsp;{{ $truck->brand->name}}</a>
-								</div>
-							</div>
-						</div>
-						<div class="kt-widget__links">
-							<div class="kt-widget__cont">
-								<div class="kt-widget__link">
-									<span>Placas: </span><a href="#">&nbsp;{{ $truck->plates }}</a>
-								</div>
-								<div class="kt-widget__link">
-									<span>Año: </span><a href="#">&nbsp;{{ $truck->year }}</a>
-								</div>
-								<div class="kt-widget__link">
-									<span>Peso/Tons: </span><a href="#">&nbsp;{{ $truck->weight }}</a>
+									<span>Marca: </span><a href="#">&nbsp;{{ $box->brand->name}}</a>
 								</div>
 							</div>
 						</div>
 						<div class="kt-widget__links">
 							<div class="kt-widget__cont">
 								<div class="kt-widget__link">
-									<span>Servicio: </span><a href="#">&nbsp;{{ $truck->service->name }}</a>
+									<span>Placas: </span><a href="#">&nbsp;{{ $box->plates }}</a>
 								</div>
 								<div class="kt-widget__link">
-									<span>Propietario: </span><a href="#">&nbsp;{{ $truck->owner->name}}</a>
+									<span>Año: </span><a href="#">&nbsp;{{ $box->year }}</a>
+								</div>
+								<div class="kt-widget__link">
+									<span>Peso/Tons: </span><a href="#">&nbsp;{{ $box->weight }}</a>
+								</div>
+							</div>
+						</div>
+						<div class="kt-widget__links">
+							<div class="kt-widget__cont">
+								<div class="kt-widget__link">
+									<span>Clasificación: </span><a href="#">&nbsp;{{ $box->clasification }}</a>
 								</div>
 							</div>
 						</div>
@@ -134,24 +131,24 @@
 							<div class="kt-widget__cont">
 								<div class="kt-widget__stat">
 									<span class="kt-widget__caption">Estado</span>
-									<span class="kt-widget__value">{{ $truck->porcentaje() }}%</span>
+									<span class="kt-widget__value">{{ $box->porcentaje() }}%</span>
 								</div>
 								<div class="progress">
 
 									<!-- Doc: A bootstrap progress bar can be used to show a user how far along it's in a process, see https://getbootstrap.com/docs/4.1/components/progress/ -->
-									<div class="progress-bar bg-brand" role="progressbar" style="width: {{ $truck->porcentaje() }}%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+									<div class="progress-bar bg-brand" role="progressbar" style="width: {{ $box->porcentaje() }}%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</div>
 						</div>
 						<div class="kt-widget__stats">
 							<div class="kt-widget__stat" href="#">
-								<span class="kt-widget__value">{{ $truck->ultimaInspeccion() }}</span>
-								<span class="kt-widget__caption">Última inspección</span>
+								<span class="kt-widget__value">{{ $box->movimientos() }}</span>
+								<span class="kt-widget__caption">Movimientos generados</span>
 							</div>
-							<div class="kt-widget__stat" href="#">
-								<span class="kt-widget__value">{{ $truck->proximaInspeccion() }}</span>
+							<!-- <div class="kt-widget__stat" href="#">
+								<span class="kt-widget__value">{{ $box->proximaInspeccion() }}</span>
 								<span class="kt-widget__caption">Próxima inspección</span>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>

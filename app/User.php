@@ -3,6 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
+use App\Presenters\UserPresenter;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
@@ -47,6 +48,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function present()
+    {
+      return new UserPresenter($this);
+    }
 
     public function setPasswordAttribute($password)
     {

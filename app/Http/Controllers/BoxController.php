@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Box;
 use App\Type;
 use App\Brand;
-use App\Service;
 use App\Owner;
+use App\Service;
+use App\Movement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -111,7 +112,9 @@ class BoxController extends Controller
      */
     public function show($id)
     {
-        //
+        $box = Box::findOrFail($id);
+
+        return view('maintenance.boxes.show')->with(compact('box'));
     }
 
     /**
@@ -191,6 +194,40 @@ class BoxController extends Controller
         }else{
             DB::rollBack();
             return back()->with('error', 'Ocurrió un problema al desactivar la caja.');
+        }
+    }
+
+    public function movimientos($id)
+    {
+        DB::beginTransaction();
+
+        $box = Box::findOrFail($id);
+        $movement = Movement::where('box_id', $box->id)->orderBy('id', 'desc')->first();
+
+        if ($movement) {
+            if($movement->movements == 60){
+                $movement = new Movement;
+                $movement->box_id = $box->id;
+                $movement->movements = 1;
+
+                $movement->save();
+            }else{
+                $movement->update(['movements' => $movement->movements + 1]);
+            }
+        }else{
+            $movement = new Movement;
+            $movement->box_id = $box->id;
+            $movement->movements = 1;
+
+            $movement->save();
+        }
+        
+        if($movement){
+            DB::commit();
+            return redirect()->route('cajas.index')->with('success', 'El movimiento se generó correctamente.');
+        }else{
+            DB::rollBack();
+            return back()->with('error', 'Ocurrió un problema al generar el movimiento.');
         }
     }
 }
