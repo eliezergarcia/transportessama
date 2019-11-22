@@ -53,11 +53,16 @@ class Box extends Model
     {
         $movement = Movement::where('box_id', $this->id)->orderBy('id', 'desc')->first();
 
-        if ($movement->movements % 2 == 0) {
-            $movimientos = $movement->movements / 2;
+        if ($movement) {
+            if ($movement->movements % 2 == 0) {
+                $movimientos = $movement->movements / 2;
+            }else{
+                $movimientos = ($movement->movements - 1) / 2;
+            }
         }else{
-            $movimientos = ($movement->movements - 1) / 2;
+            $movimientos = 0;
         }
+
 
         return $movimientos;
     }

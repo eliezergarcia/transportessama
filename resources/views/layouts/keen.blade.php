@@ -42,7 +42,7 @@ License: You must have a valid license purchased only from https://themes.getboo
 		<link href="{{ asset('assets/css/skins/header/navy.css') }}" rel="stylesheet" type="text/css" />
 
 		<!--end::Layout Skins -->
-		<link rel="shortcut icon" href="{{ asset('assets/media/logos/logo-sama1.png') }}" />
+		<link rel="shortcut icon" href="{{ asset('assets/media/logos/samafreight-logo.png') }}" />
 	</head>
 
 	<!-- end::Head -->

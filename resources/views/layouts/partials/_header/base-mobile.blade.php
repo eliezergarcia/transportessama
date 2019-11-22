@@ -3,7 +3,7 @@
 <div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
 	<div class="kt-header-mobile__logo">
 		<a href="index.html">
-			<img alt="Logo" src="assets/media/logos/logo-1.png" />
+			<img alt="Logo" src="{{ asset('assets/media/logos/samafreight-logo.png') }}" />
 		</a>
 	</div>
 	<div class="kt-header-mobile__toolbar">
