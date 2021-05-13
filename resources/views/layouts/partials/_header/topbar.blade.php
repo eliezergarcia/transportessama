@@ -14,8 +14,8 @@
 	<!--begin: Notifications -->
 	<div class="kt-header__topbar-item">
 		<div class="kt-header__topbar-wrapper" id="kt_offcanvas_toolbar_notifications_toggler_btn">
-			<span class="kt-header__topbar-icon"><i class="flaticon2-notification"></i></span>
-			<span class="kt-badge kt-badge--brand"></span>
+			{{-- <span class="kt-header__topbar-icon"><i class="flaticon2-notification"></i></span> --}}
+			{{-- <span class="kt-badge kt-badge--brand"></span> --}}
 		</div>
 	</div>
 
@@ -80,7 +80,7 @@
 			{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
 		</div>
 		<div class="kt-header__topbar-wrapper">
-			<img alt="Pic" src="{{ Storage::url(Auth::user()->url) }}" />
+			<img alt="Pic" src="{{ Auth::user()->getUrlAttribute() }}" />
 		</div>
 	</div>
 

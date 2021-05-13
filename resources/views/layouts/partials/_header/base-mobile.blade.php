@@ -1,9 +1,9 @@
 
 <!-- begin:: Header Mobile -->
 <div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
-	<div class="kt-header-mobile__logo">
-		<a href="index.html">
-			<img alt="Logo" src="{{ asset('assets/media/logos/samafreight-logo.png') }}" />
+	<div class="kt-header-mobile__logo" style="width: 110px;">
+		<a href="index.html" style="position: relative;width: 100%;height: 100%; background: white;">
+			<img alt="Logo" src="{{ asset('assets/media/logos/samafreight-logo.png') }}" style="position: relative; width: 100%; height: 100%;"/>
 		</a>
 	</div>
 	<div class="kt-header-mobile__toolbar">

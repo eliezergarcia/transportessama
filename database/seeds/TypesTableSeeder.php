@@ -13,38 +13,48 @@ class TypesTableSeeder extends Seeder
     public function run()
     {
         Type::create([
-            'type' => 'TRUCK',
-        	'name' => 'VAGONETA'
+            'type' => 'TRUCK & BOX',
+        	'name' => 'TRANSFER'
         ]);
 
         Type::create([
-            'type' => 'TRUCK',
-        	'name' => 'REDILAS'
+            'type' => 'TRUCK & BOX',
+        	'name' => 'FORANEO'
         ]);
 
-        Type::create([
-            'type' => 'TRUCK',
-        	'name' => 'PICK UP'
-        ]);
+        // Type::create([
+        //     'type' => 'TRUCK',
+        // 	'name' => 'VAGONETA'
+        // ]);
 
-        Type::create([
-            'type' => 'TRUCK',
-        	'name' => 'VAN'
-        ]);
+        // Type::create([
+        //     'type' => 'TRUCK',
+        // 	'name' => 'REDILAS'
+        // ]);
 
-        Type::create([
-            'type' => 'TRUCK',
-        	'name' => 'CORTO'
-        ]);
+        // Type::create([
+        //     'type' => 'TRUCK',
+        // 	'name' => 'PICK UP'
+        // ]);
 
-        Type::create([
-            'type' => 'TRUCK',
-        	'name' => 'TRACTOR'
-        ]);
+        // Type::create([
+        //     'type' => 'TRUCK',
+        // 	'name' => 'VAN'
+        // ]);
 
-        Type::create([
-            'type' => 'BOX',
-            'name' => 'CAJA SECA'
-        ]);
+        // Type::create([
+        //     'type' => 'TRUCK',
+        // 	'name' => 'CORTO'
+        // ]);
+
+        // Type::create([
+        //     'type' => 'TRUCK',
+        // 	'name' => 'TRACTOR'
+        // ]);
+
+        // Type::create([
+        //     'type' => 'BOX',
+        //     'name' => 'CAJA SECA'
+        // ]);
     }
 }

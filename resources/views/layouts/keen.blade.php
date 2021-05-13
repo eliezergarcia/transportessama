@@ -90,7 +90,7 @@ License: You must have a valid license purchased only from https://themes.getboo
 		<!-- begin:: Topbar Offcanvas Panels -->
 
 		<!--[html-partial:include:{"file":"partials/_topbar/offcanvas/search.html"}]/-->
-		<!-- @include('layouts.partials._topbar.offcanvas.search') -->
+		@include('layouts.partials._topbar.offcanvas.search')
 
 		<!--[html-partial:include:{"file":"partials/_topbar/offcanvas/notifications.html"}]/-->
 		@include('layouts.partials._topbar.offcanvas.notifications')

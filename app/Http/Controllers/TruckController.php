@@ -27,7 +27,7 @@ class TruckController extends Controller
 
     public function list()
     {
-        $trucks = Truck::with(['type', 'brand', 'service', 'owner'])->get();
+        $trucks = Truck::get();
 
         return $trucks;
     }
@@ -103,6 +103,7 @@ class TruckController extends Controller
         DB::beginTransaction();
 
         $truck = (new Truck)->fill($request->all());
+        $truck->status_mileage = $truck->statusMileage();
         $truck->save();
 
         /*$user->roles()->attach($request->roles);*/
@@ -154,6 +155,7 @@ class TruckController extends Controller
         $truck = Truck::findOrFail($id);
 
         $truck->update($request->all());
+        $truck->status_mileage = $truck->statusMileage();
         $truck->save();
 
 

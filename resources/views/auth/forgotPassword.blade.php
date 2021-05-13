@@ -44,8 +44,6 @@ License: You must have a valid license purchased only from https://themes.getboo
 
         <!--end::Layout Skins -->
         <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
-
-        
     </head>
 
     <!-- end::Head -->
@@ -86,7 +84,7 @@ License: You must have a valid license purchased only from https://themes.getboo
 
                         <!--begin::Wrapper-->
                         <div class="kt-login-v2__wrapper" style="width: 65%;">
-                            <div class="kt-login-v2__container" style="box-shadow: 0px 15px 40px rgb(77 84 124 / 25%);">
+                            <div class="kt-login-v2__container">
                                 <div class="kt-login-v2__title">
                                     <h3>Ingresa a tu cuenta</h3>
                                 </div>
@@ -117,14 +115,11 @@ License: You must have a valid license purchased only from https://themes.getboo
                                     </div>
 
                                     <!--begin::Action-->
-                                    <div class="form-group">
-
-                                        <div class="kt-login-v2__actions">
-                                            {{-- <a href="#" class="kt-link kt-link--brand">
-                                                Olvidaste tu contraseña ?
-                                            </a> --}}
-                                            <button type="submit" class="btn btn-brand btn-elevate btn-pill" style="width: 100%;">Ingresar</button>
-                                        </div>
+                                    <div class="kt-login-v2__actions">
+                                        <a href="#" class="kt-link kt-link--brand">
+                                            Olvidaste tu contraseña ?
+                                        </a>
+                                        <button type="submit" class="btn btn-brand btn-elevate btn-pill">Ingresar</button>
                                     </div>
 
                                     <!--end::Action-->

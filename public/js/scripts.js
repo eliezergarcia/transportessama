@@ -9788,7 +9788,7 @@ output("js/scripts.bundle");
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\wamp64\www\transportessama\resources\tools\webpack\scripts.js */"./resources/tools/webpack/scripts.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\sama-freight\resources\tools\webpack\scripts.js */"./resources/tools/webpack/scripts.js");
 
 
 /***/ })

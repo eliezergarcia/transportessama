@@ -12,8 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('auth.login');
-});
+    return redirect('/tractores');
+})->middleware('auth');
 
 Auth::routes();
 
@@ -24,7 +24,7 @@ Route::get('/dashboard', 'HomeController@dashboardIndex')->name('dashboard');
 Route::get('/usuarios/listar', 'UserController@list')->name('usuarios.list');
 Route::post('/usuarios/activar/{id}', 'UserController@activate')->name('usuarios.activate');
 Route::delete('/usuarios/desactivar/{id}', 'UserController@deactivate')->name('usuarios.deactivate');
-Route::resource('usuarios', 'UserController');
+Route::resource('usuarios', 'UserController')->middleware('auth');
 
 Route::get('/tractores/listar', 'TruckController@list')->name('tractores.list');
 Route::post('/tractores/activar/{id}', 'TruckController@activate')->name('tractores.activate');
@@ -33,11 +33,11 @@ Route::get('/tractores/relacionesCrear', 'TruckController@relationsCreate')->nam
 Route::get('/tractores/relaciones/{id}', 'TruckController@relations')->name('tractores.relations');
 Route::get('/tractores/buscarPlacas/{id}', 'TruckController@findPlates')->name('tractores.findPlates');
 Route::get('/tractores/status/{id}', 'TruckController@status')->name('tractores.status');
-Route::resource('tractores', 'TruckController');
+Route::resource('tractores', 'TruckController')->middleware('auth');
 
 Route::get('/puntosInspeccion/listar', 'InspectionPointController@list')->name('puntosInspeccion.list');
 Route::get('/puntosInspeccion/listarTTI', 'InspectionPointController@listTTI')->name('puntosInspeccion.listTTI');
-Route::resource('puntosInspeccion', 'InspectionPointController');
+Route::resource('puntosInspeccion', 'InspectionPointController')->middleware('auth');
 
 Route::get('/cajas/listar', 'BoxController@list')->name('cajas.list');
 Route::post('/cajas/activar/{id}', 'BoxController@activate')->name('cajas.activate');
@@ -46,7 +46,7 @@ Route::post('/cajas/movimientos/{id}', 'BoxController@movimientos')->name('cajas
 Route::get('/cajas/relacionesCrear', 'BoxController@relationsCreate')->name('cajas.relationsCreate');
 Route::get('/cajas/relaciones/{id}', 'BoxController@relations')->name('cajas.relations');
 Route::get('/cajas/buscarPlacas/{id}', 'BoxController@findPlates')->name('cajas.findPlates');
-Route::resource('cajas', 'BoxController');
+Route::resource('cajas', 'BoxController')->middleware('auth');
 
-Route::resource('inspecciones', 'InspectionController');
-Route::resource('mantenimientos', 'MaintenanceController');
+Route::resource('inspecciones', 'InspectionController')->middleware('auth');
+Route::resource('mantenimientos', 'MaintenanceController')->middleware('auth');

@@ -14,62 +14,62 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use GeneralFunctions;
-    
-    use Notifiable;
+	use GeneralFunctions;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    /*protected $fillable = [
+	use Notifiable;
+
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array
+	 */
+	/*protected $fillable = [
         'first_name', 'last_name', 'email', 'password', 'password_encrypted', 'inactive_at'
     ];*/
 
-    protected $guarded = [
-        'id_user', 'created_at', 'updated_at', 'avatar'
-    ];
+	protected $guarded = [
+		'id_user', 'created_at', 'updated_at', 'avatar'
+	];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    /*protected $hidden = [
+	/**
+	 * The attributes that should be hidden for arrays.
+	 *
+	 * @var array
+	 */
+	/*protected $hidden = [
         'password', 'remember_token',
     ];*/
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+	/**
+	 * The attributes that should be cast to native types.
+	 *
+	 * @var array
+	 */
+	protected $casts = [
+		'email_verified_at' => 'datetime',
+	];
 
-    public function present()
-    {
-      return new UserPresenter($this);
-    }
+	public function present()
+	{
+		return new UserPresenter($this);
+	}
 
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = Hash::make($password);
-    }
+	public function setPasswordAttribute($password)
+	{
+		$this->attributes['password'] = Hash::make($password);
+	}
 
-    public function getUrlAttribute()
-    {
-      if (!$this->avatar) {
-        return 'public/default.jpg';
-      }
+	public function getUrlAttribute()
+	{
+		if (!$this->avatar) {
+			return '/public/assets/images/users/avatar-1.jpg';
+		}
 
-      return $this->avatar;
-    }
+		return $this->avatar;
+	}
 
-    public function saludo()
-    {
-        return "Hola";
-    }
+	public function saludo()
+	{
+		return "Hola";
+	}
 }

@@ -92,4 +92,28 @@ class Truck extends Model
 
     }
 
+    public function getLatestMileageInspection()
+    {
+        return Carbon::createFromFormat('d-m-Y', $this->date_mileage);    
+    }
+
+    public function statusMileage()
+    {
+        $diffMileage = $this->actual_mileage - $this->latest_mileage;
+
+        if($diffMileage < 13000){
+            return 1;
+        }
+
+        if($diffMileage >= 13000){
+            return 2;
+        }
+
+        if($diffMileage >= 15000){
+            return 3;
+        }
+
+        return 0;
+    }
+
 }

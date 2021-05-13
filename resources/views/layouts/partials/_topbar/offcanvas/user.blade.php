@@ -3,14 +3,14 @@
 <div id="kt_offcanvas_toolbar_profile" class="kt-offcanvas-panel">
 	<div class="kt-offcanvas-panel__head">
 		<h3 class="kt-offcanvas-panel__title">
-			Profile
+			Perfil
 		</h3>
 		<a href="#" class="kt-offcanvas-panel__close" id="kt_offcanvas_toolbar_profile_close"><i class="flaticon2-delete"></i></a>
 	</div>
 	<div class="kt-offcanvas-panel__body">
 		<div class="kt-user-card-v3 kt-margin-b-30">
 			<div class="kt-user-card-v3__avatar">
-				<img src="{{ Storage::url(Auth::user()->url) }}" alt="" />
+				<img src="{{ Storage::url(Auth::user()->getUrlAttribute()) }}" alt="" />
 			</div>
 			<div class="kt-user-card-v3__detalis">
 				<a href="#" class="kt-user-card-v3__name">

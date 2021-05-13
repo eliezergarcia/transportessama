@@ -31,7 +31,7 @@ class BoxController extends Controller
 
     public function list()
     {
-        $boxes = Box::with(['type', 'brand'])->get();
+        $boxes = Box::get();
 
         return $boxes;
     }
@@ -91,6 +91,7 @@ class BoxController extends Controller
         DB::beginTransaction();
 
         $box = (new Box)->fill($request->all());
+        $box->status_mileage = $box->statusMileage();
         $box->save();
 
         /*$user->roles()->attach($request->roles);*/
@@ -142,6 +143,7 @@ class BoxController extends Controller
         $box = Box::findOrFail($id);
 
         $box->update($request->all());
+        $box->status_mileage = $box->statusMileage();
         $box->save();
 
 

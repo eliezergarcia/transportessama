@@ -3,6 +3,8 @@
 /public/storage
 /storage/*.key
 /vendor
+/keen_v1.4.3
+/keen_v2.1.1
 .env
 .phpunit.result.cache
 Homestead.json

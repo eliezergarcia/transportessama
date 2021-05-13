@@ -6,7 +6,8 @@
 		<div class="kt-container  kt-container--fluid ">
 			<!-- begin:: Subheader Title -->
 			<div class="kt-subheader__title">
-				<button class="kt-subheader__toggler kt-subheader__toggler--left" id="kt_aside_toggler"><span></span></button>
+				<!-- <button class="kt-subheader__toggler kt-subheader__toggler--left" id="kt_aside_toggler"><span></span></button> -->
+				<button class="kt-subheader__toggler kt-subheader__toggler--left" id=""><span></span></button>
 				<div class="kt-subheader__breadcrumbs">
 					<a href="" class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--home">Mantenimiento</a>
 					<span class="kt-subheader__breadcrumbs-separator"></span>
