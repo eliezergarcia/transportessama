@@ -181,9 +181,9 @@
 										<a @click="showEditModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver detalles">		
 											<i class="flaticon-edit-1"></i>					
 										</a>
-										<a @click="showBoxInformationModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver detalles">		
+										{{-- <a @click="showBoxInformationModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver detalles">		
 											<i class="flaticon2-expand"></i>						
-										</a>
+										</a> --}}
 										<a @click="showDeactivateModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver detalles">		
 											<i class="flaticon-delete-1"></i>						
 										</a>
