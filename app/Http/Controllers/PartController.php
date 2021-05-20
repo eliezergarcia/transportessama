@@ -48,7 +48,7 @@ class PartController extends Controller
             return back()->with('success', 'La parte se agregó al tractor correctamente.');
         }else{
             DB::rollBack();
-            return back()->with('error', 'Ocurrió un problema al registrar el tractor.');
+            return;
         }
     }
 
