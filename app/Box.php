@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -70,6 +70,20 @@ class Box extends Model
     public function proximaInspeccion()
     {
 
+    }
+
+    
+    public function getLatestMileageInspection()
+    {
+        return Carbon::parse($this->date_mileage)->format('d-m-Y');    
+    }
+
+    public function checkDecimal($number){
+        if ($number % 1 == 0) {
+            return round($number);
+        } else {
+            return $number;
+        }
     }
 
     public function statusMileage()

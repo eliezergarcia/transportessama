@@ -173,18 +173,18 @@
 								<td>Revisión en kilometraje <br/>Alerta calendario de partes</td>
 								<td style="display:flex;">
 									<div v-if="truck.inactive_at">
-										<a @click="showActivateModal(truck)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver detalles">		
+										<a @click="showActivateModal(truck)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="Activar tractor" data-original-title="Activar tractor">		
 											<i class="flaticon2-refresh-arrow"></i>						
 										</a>
 									</div>
 									<div v-else>
-										<a @click="showEditModal(truck)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver detalles">		
+										<a @click="showTruckInformationModal(truck)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="Ver detalles" data-original-title="Ver detalles">		
+											<i class="flaticon2-expand"></i>						
+										</a>
+										<a @click="showEditModal(truck)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="Editar información" data-original-title="Editar información">		
 											<i class="flaticon-edit-1"></i>					
 										</a>
-										{{-- <a @click="showBoxInformationModal(truck)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver detalles">		
-											<i class="flaticon2-expand"></i>						
-										</a> --}}
-										<a @click="showDeactivateModal(truck)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver detalles">		
+										<a @click="showDeactivateModal(truck)" class="btn btn-sm btn-icon btn-clean btn-icon-sm" data-toggle="tooltip" data-placement="top" title="Desactivar tractor" data-original-title="Desactivar tractor">		
 											<i class="flaticon-delete-1"></i>						
 										</a>
 									</div>
@@ -198,7 +198,6 @@
 
 		<!--end::Form-->
 	</div>
-
 	<!--end::Portlet-->
 
 @endsection
@@ -746,6 +745,10 @@
 						number = number.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2')
 					} 
 					return number
+				},
+				showTruckInformationModal(truck = []){
+					this.id_truck = truck['id'];
+					window.location = this.base_url + '/tractores/' + this.id_truck;
 				}
 
 			},

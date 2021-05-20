@@ -20,6 +20,11 @@ class Truck extends Model
       return new TruckPresenter($this);
     }
 
+    public function part()
+    {
+      return $this->belongsTo(Part::class);
+    }
+
     public function type()
     {
       return $this->belongsTo(Type::class);
@@ -94,8 +99,24 @@ class Truck extends Model
 
     public function getLatestMileageInspection()
     {
-        return Carbon::createFromFormat('d-m-Y', $this->date_mileage);    
+        return Carbon::parse($this->date_mileage)->format('d-m-Y');    
     }
+
+    public function checkDecimal($number){
+        if ($number % 1 == 0) {
+            return round($number);
+        } else {
+            return $number;
+        }
+    }
+
+    // public function commaSeparateNumber($number){
+    //     while (/(\d+)(\d{3})/.test(number.toString())){
+    //         number = number.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+    //     } 
+
+    //     return number;
+    // }
 
     public function statusMileage()
     {

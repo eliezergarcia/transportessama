@@ -173,18 +173,18 @@
 								<td>Revisión en kilometraje <br/>Alerta calendario de partes</td>
 								<td style="display:flex;">
 									<div v-if="box.inactive_at">
-										<a @click="showActivateModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver detalles">		
+										<a @click="showActivateModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="Activar caja" data-original-title="Activar caja">		
 											<i class="flaticon2-refresh-arrow"></i>						
 										</a>
 									</div>
 									<div v-else>
-										<a @click="showEditModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver detalles">		
+										<a @click="showBoxInformationModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="Ver detalles" data-original-title="Ver detalles">		
+											<i class="flaticon2-expand"></i>						
+										</a>
+										<a @click="showEditModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="Editar información" data-original-title="Editar información">		
 											<i class="flaticon-edit-1"></i>					
 										</a>
-										{{-- <a @click="showBoxInformationModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver detalles">		
-											<i class="flaticon2-expand"></i>						
-										</a> --}}
-										<a @click="showDeactivateModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver detalles">		
+										<a @click="showDeactivateModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="Desactivar caja" data-original-title="Desactivar caja">		
 											<i class="flaticon-delete-1"></i>						
 										</a>
 									</div>
@@ -746,6 +746,10 @@
 						number = number.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2')
 					} 
 					return number
+				},
+				showBoxInformationModal(truck = []){
+					this.id_truck = truck['id'];
+					window.location = this.base_url + '/cajas/' + this.id_truck;
 				}
 
 			},

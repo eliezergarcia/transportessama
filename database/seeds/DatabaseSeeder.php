@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->call('TrucksTableSeeder');
         $this->call('BoxesTableSeeder');
         $this->call('TypesTableSeeder');
+        $this->call('PartsTableSeeder');
+        $this->call('SubpartsTableSeeder');
         // $this->call('BrandsTableSeeder');
         // $this->call('ServicesTableSeeder');
         // $this->call('OwnersTableSeeder');

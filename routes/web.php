@@ -50,3 +50,13 @@ Route::resource('cajas', 'BoxController')->middleware('auth');
 
 Route::resource('inspecciones', 'InspectionController')->middleware('auth');
 Route::resource('mantenimientos', 'MaintenanceController')->middleware('auth');
+
+Route::get('/partes/obtenerPartesTractor/{id}', 'PartController@getPartsTruck')->name('partes.getPartsTruck');
+Route::get('/partes/obtenerPartesCaja/{id}', 'PartController@getPartsBox')->name('partes.getPartsBox');
+Route::delete('/partes/desactivar/{id}', 'PartController@deactivate')->name('partes.deactivate');
+Route::resource('partes', 'PartController')->middleware('auth');
+
+
+Route::get('/subpartes/obtenerSubpartes/{id}', 'SubpartController@getSubparts')->name('subpartes.getSubparts');
+Route::delete('/subpartes/desactivar/{id}', 'SubpartController@deactivate')->name('subpartes.deactivate');
+Route::resource('subpartes', 'SubpartController')->middleware('auth');
