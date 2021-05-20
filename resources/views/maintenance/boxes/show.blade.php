@@ -1028,7 +1028,7 @@
 			},
 			createPart(){
 				let me = this;
-				axios.post(this.base_url + '/partes/', {
+				axios.post(this.base_url + '/partes', {
 					box_id: document.getElementById('id_box').value,
 					name: this.name_part,
 				})
@@ -1201,7 +1201,7 @@
 			},
 			createSubpart(){
 				let me = this;
-				axios.post(this.base_url + '/subpartes/', {
+				axios.post(this.base_url + '/subpartes', {
 					box_id: document.getElementById('id_box').value,
 					part_id: this.id_part,
 					name: this.name_subpart,
