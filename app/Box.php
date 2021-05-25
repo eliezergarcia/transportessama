@@ -10,7 +10,7 @@ class Box extends Model
     use GeneralFunctions;
     
     protected $guarded = [
-        'id_box', 'created_at', 'updated_at'
+        'box_id', 'created_at', 'updated_at'
     ];
 
     public function type()
@@ -103,5 +103,17 @@ class Box extends Model
         }
 
         return 0;
+    }
+
+    public function updateSubparts(){
+
+        $subparts = Subpart::where('box_id', $this->id)->where('inactive_at', null)->get();
+
+        foreach ($subparts as $subpart) {
+            $subpart->status = $subpart->statusMileage();
+            $subpart->save();
+            $subpart->updatePart();
+            $subpart->updateTruck();
+        }
     }
 }

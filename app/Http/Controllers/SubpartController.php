@@ -42,6 +42,9 @@ class SubpartController extends Controller
         $subpart->status = $subpart->statusMileage();
         $subpart->save();
 
+        $subpart->updatePart();
+        $subpart->updateTruck();
+
         if($subpart){
             DB::commit();
             return back()->with('success', 'La subparte se agregó al tractor correctamente.');
@@ -88,6 +91,9 @@ class SubpartController extends Controller
         $subpart->update($request->all());
         $subpart->status = $subpart->statusMileage();
         $subpart->save();
+        
+        $subpart->updatePart();
+        $subpart->updateTruck();
 
         if($subpart){
             DB::commit();

@@ -110,14 +110,6 @@ class Truck extends Model
         }
     }
 
-    // public function commaSeparateNumber($number){
-    //     while (/(\d+)(\d{3})/.test(number.toString())){
-    //         number = number.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
-    //     } 
-
-    //     return number;
-    // }
-
     public function statusMileage()
     {
         $diffMileage = $this->actual_mileage - $this->latest_mileage;
@@ -137,4 +129,15 @@ class Truck extends Model
         return 0;
     }
 
+    public function updateSubparts(){
+
+        $subparts = Subpart::where('truck_id', $this->id)->where('inactive_at', null)->get();
+
+        foreach ($subparts as $subpart) {
+            $subpart->status = $subpart->statusMileage();
+            $subpart->save();
+            $subpart->updatePart();
+            $subpart->updateTruck();
+        }
+    }
 }

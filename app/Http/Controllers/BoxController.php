@@ -146,6 +146,8 @@ class BoxController extends Controller
         $box->status_mileage = $box->statusMileage();
         $box->save();
 
+        $box->updateSubparts();
+
 
         if($box){
             DB::commit();

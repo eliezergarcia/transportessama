@@ -122,7 +122,7 @@
 						<div class="kt-widget__links">
 							<div class="kt-widget__cont">
 								<div class="kt-widget__link" style="display:flex;align-items:center;">
-									<span>Revisión en kilometraje: </span>&nbsp;&nbsp;
+									<span style="min-width: 160px;">Revisión en kilometraje: </span>&nbsp;&nbsp;
 									@if($truck->status_mileage === 1) 
 										<span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--rounded"
 										style="width: 75px;height:4px;padding:0;background: #388e3c;"></span>
@@ -144,8 +144,8 @@
 										style="width: 75px;height:4px;padding:0;background: transparent;"></span>
 									@endif
 								</div>
-								<div class="kt-widget__link">
-									<span>Calendario de partes: </span>&nbsp;&nbsp;
+								<div class="kt-widget__link" style="display:flex;align-items:center;">
+									<span style="min-width: 160px;">Calendario de partes: </span>&nbsp;&nbsp;
 									@if($truck->status_parts === 1) 
 										<span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--rounded"
 										style="width: 75px;height:4px;padding:0;background: #388e3c;"></span>
@@ -982,7 +982,7 @@
 					};
 
 					toastr.success("La información del tractor se guardó correctamente.", "Correcto");
-					window.location.reload()
+					// window.location.reload()
 				})
 				.catch(function (error) {
 					console.log(error);
@@ -1413,6 +1413,8 @@
 	})
 
 	function showCreatePartModal() {
+		app.id_part = ''
+		app.name_part = ''
 		$('#createPartModal').modal('show');
 	}
 
@@ -1431,6 +1433,14 @@
 
 	function showCreateSubpartModal(id) {
 		app.id_part = id
+		app.id_subpart = ''
+		app.name_subpart = ''
+		app.instalation_date = ''
+		app.instalation_mileage = ''
+		app.expiration_mileage = ''
+		app.number = ''
+		app.ubication = ''
+		app.notes = ''
 		$('#createSubpartModal').modal('show');
 	}
 

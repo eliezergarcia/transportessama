@@ -122,7 +122,7 @@
 						<div class="kt-widget__links">
 							<div class="kt-widget__cont">
 								<div class="kt-widget__link" style="display:flex;align-items:center;">
-									<span>Revisión en kilometraje: </span>&nbsp;&nbsp;
+									<span style="min-width: 160px;">Revisión en kilometraje: </span>&nbsp;&nbsp;
 									@if($box->status_mileage === 1) 
 										<span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--rounded"
 										style="width: 75px;height:4px;padding:0;background: #388e3c;"></span>
@@ -144,8 +144,8 @@
 										style="width: 75px;height:4px;padding:0;background: transparent;"></span>
 									@endif
 								</div>
-								<div class="kt-widget__link">
-									<span>Calendario de partes: </span>&nbsp;&nbsp;
+								<div class="kt-widget__link" style="display:flex;align-items:center;">
+									<span style="min-width: 160px;">Calendario de partes: </span>&nbsp;&nbsp;
 									@if($box->status_parts === 1) 
 										<span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--rounded"
 										style="width: 75px;height:4px;padding:0;background: #388e3c;"></span>
@@ -949,9 +949,8 @@
 			},		
 			saveTruck() {
 				let me = this;
-				axios.post(this.base_url + '/tractores/' + document.getElementById('id_box').value, {
+				axios.post(this.base_url + '/cajas/' + document.getElementById('id_box').value, {
 					_method: "PUT",
-					id_box: document.getElementById('id_box').value,
 					trailer: document.getElementById('trailer').value,
 					type: document.getElementById('type').value,
 					plates: document.getElementById('plates').value,

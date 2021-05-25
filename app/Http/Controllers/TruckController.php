@@ -158,6 +158,8 @@ class TruckController extends Controller
         $truck->status_mileage = $truck->statusMileage();
         $truck->save();
 
+        $truck->updateSubparts();
+
 
         if($truck){
             DB::commit();
