@@ -85,7 +85,7 @@ License: You must have a valid license purchased only from https://themes.getboo
                     <div class="kt-login-v2__body">
 
                         <!--begin::Wrapper-->
-                        <div class="kt-login-v2__wrapper" style="width: 65%;">
+                        <div class="kt-login-v2__wrapper">
                             <div class="kt-login-v2__container" style="box-shadow: 0px 15px 40px rgb(77 84 124 / 25%);">
                                 <div class="kt-login-v2__title">
                                     <h3>Ingresa a tu cuenta</h3>

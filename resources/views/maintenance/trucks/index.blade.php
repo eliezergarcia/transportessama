@@ -789,7 +789,7 @@
 		                    "colvis": "Visibilidad"
 		                }
 					},
-					"dom" : "<'row justify-content-between'<'justify-content-between col-sm-12 col-md-10'l><'justify-content-between col-sm-12 col-md-2'f>>" +
+					"dom" : "<'row justify-content-between'<'col-lg-12 col-md-9 col-sm-6'l><'col-lg-12 col-md-3 col-sm-6'f>>" +
 							"<'row'<'col-sm-12'tr>>" +
 							"<'row justify-content-between'<'col-sm-12 col-md-9'i><'row justify-content-end col-sm-12 col-md-3'p>>",
 			    });

@@ -713,12 +713,13 @@
 						serverPaging: true,
 						serverFiltering: false,
 						serverSorting: true,
+						autoColumns: true
 					},
 
 					// layout definition
 					layout: {
 						theme: 'default',
-						scroll: false,
+						scroll: true,
 						height: null,
 						footer: false,
 					},

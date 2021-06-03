@@ -16505,6 +16505,7 @@ body.swal2-height-auto {
     flex: 1 auto;
 }
 .dataTables_wrapper {
+    overflow: scroll;
     padding: 0 !important;
 }
 .dataTables_wrapper .dataTable {
@@ -17778,6 +17779,8 @@ body.swal2-height-auto {
 }
 .kt-page-loader.kt-page-loader--logo img {
     display: block;
+    width: 10%;
+    height: auto;
 }
 .kt-page-loader.kt-page-loader--logo .kt-spinner {
     margin-top: 3rem;
@@ -27114,7 +27117,7 @@ strong {
 }
 .kt-datatable.kt-datatable--default > .kt-datatable__table {
     border-collapse: collapse;
-    overflow: hidden;
+    overflow: scroll;
     display: none;
     width: 100%;
 }
@@ -27398,7 +27401,7 @@ strong {
     > .kt-datatable__cell
     > span {
     display: block;
-    overflow: hidden;
+    overflow: auto;
     text-overflow: ellipsis;
 }
 .kt-datatable.kt-datatable--default
@@ -27854,7 +27857,7 @@ strong {
 .kt-datatable.kt-datatable--default.kt-datatable--scroll
     > .kt-datatable__table
     > .kt-datatable__body {
-    overflow: hidden;
+    overflow: auto;
 }
 .kt-datatable.kt-datatable--default > .kt-datatable__pager {
     margin: 0;
