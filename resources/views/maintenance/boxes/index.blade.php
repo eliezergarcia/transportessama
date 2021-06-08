@@ -443,7 +443,6 @@
 		  		createTruck() {
 					let me = this;
 					axios.post(this.base_url + '/cajas', {
-						id_box: this.id_box,
 						trailer: this.trailer,
 						type: this.type,
 						plates: this.plates,
@@ -520,7 +519,6 @@
 					let me = this;
 					axios.post(this.base_url + '/cajas/' + this.id_box, {
 						_method: "PUT",
-						id_box: this.id_box,
 						trailer: this.trailer,
 						type: this.type,
 						plates: this.plates,
