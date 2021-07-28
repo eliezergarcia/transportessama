@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Box extends Model
 {
     use GeneralFunctions;
-    
+
     protected $guarded = [
         'box_id', 'created_at', 'updated_at'
     ];
@@ -23,19 +23,19 @@ class Box extends Model
       return $this->belongsTo(Brand::class);
     }
 
-    public function obtenerYear() 
+    public function obtenerYear()
     {
         if($this->year == 0){
             return "PTE";
         }else{
             return $this->year;
-        }   
+        }
     }
 
     public function porcentaje()
     {
         $mantenimiento = Maintenance::where('box_id', $this->id)->orderBy('id', 'desc')->first();
-        
+
         if($mantenimiento){
             $points = DB::table('assigned_points')->where('maintenance_id', $mantenimiento->id)->get();
             $total = 100/$points->count();
@@ -72,10 +72,10 @@ class Box extends Model
 
     }
 
-    
+
     public function getLatestMileageInspection()
     {
-        return Carbon::parse($this->date_mileage)->format('d-m-Y');    
+        return Carbon::parse($this->date_mileage)->format('d-m-Y');
     }
 
     public function checkDecimal($number){
@@ -115,5 +115,17 @@ class Box extends Model
             $subpart->updatePart();
             $subpart->updateTruck();
         }
+    }
+
+    public function yellowPartsExcel(){
+        $parts = Part::where('box_id', $this->id)->where('status', 2)->where('inactive_at', null)->get();
+
+        return $parts;
+    }
+
+    public function redPartsExcel(){
+        $parts = Part::where('box_id', $this->id)->where('status', 3)->where('inactive_at', null)->get();
+
+        return $parts;
     }
 }

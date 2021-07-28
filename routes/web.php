@@ -33,6 +33,8 @@ Route::get('/tractores/relacionesCrear', 'TruckController@relationsCreate')->nam
 Route::get('/tractores/relaciones/{id}', 'TruckController@relations')->name('tractores.relations');
 Route::get('/tractores/buscarPlacas/{id}', 'TruckController@findPlates')->name('tractores.findPlates');
 Route::get('/tractores/status/{id}', 'TruckController@status')->name('tractores.status');
+Route::get('/tractores/export_excel/', 'TruckController@exportExcel');
+Route::get('/tractores/export_pdf/', 'TruckController@exportPdf');
 Route::resource('tractores', 'TruckController')->middleware('auth');
 
 Route::get('/puntosInspeccion/listar', 'InspectionPointController@list')->name('puntosInspeccion.list');
@@ -46,6 +48,8 @@ Route::post('/cajas/movimientos/{id}', 'BoxController@movimientos')->name('cajas
 Route::get('/cajas/relacionesCrear', 'BoxController@relationsCreate')->name('cajas.relationsCreate');
 Route::get('/cajas/relaciones/{id}', 'BoxController@relations')->name('cajas.relations');
 Route::get('/cajas/buscarPlacas/{id}', 'BoxController@findPlates')->name('cajas.findPlates');
+Route::get('/cajas/export_excel/', 'BoxController@exportExcel');
+Route::get('/cajas/export_pdf/', 'BoxController@exportPdf');
 Route::resource('cajas', 'BoxController')->middleware('auth');
 
 Route::resource('inspecciones', 'InspectionController')->middleware('auth');

@@ -17734,7 +17734,7 @@ body.swal2-height-auto {
 }
 @media (min-width: 1439px) {
     .kt-container {
-        width: 1380px;
+        width: 1580px;
         margin: 0 auto;
     }
     .kt-container.kt-container--fluid {
@@ -27181,7 +27181,7 @@ strong {
     > .kt-datatable__head
     .kt-datatable__row
     > .kt-datatable__cell:first-child {
-    padding-left: 25px;
+    /* padding-left: 25px; */
 }
 .kt-datatable.kt-datatable--default
     > .kt-datatable__table

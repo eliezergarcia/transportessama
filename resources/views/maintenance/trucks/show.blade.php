@@ -123,46 +123,46 @@
 							<div class="kt-widget__cont">
 								<div class="kt-widget__link" style="display:flex;align-items:center;">
 									<span style="min-width: 160px;">Revisión en kilometraje: </span>&nbsp;&nbsp;
-									@if($truck->status_mileage === 1) 
+									@if($truck->status_mileage === 1)
 										<span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--rounded"
 										style="width: 75px;height:4px;padding:0;background: #388e3c;"></span>
 									@endif
-									@if($truck->status_mileage === 2) 
+									@if($truck->status_mileage === 2)
 										<span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--rounded"
 										style="width: 75px;height:4px;padding:0;background: #fbc02d;"></span>
 									@endif
-									@if($truck->status_mileage === 3) 
+									@if($truck->status_mileage === 3)
 										<span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--rounded"
 										style="width: 75px;height:4px;padding:0;background: #d32f2f;"></span>
 									@endif
-									@if($truck->status_mileage === 0) 
+									@if($truck->status_mileage === 0)
 										<span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--rounded"
 										style="width: 75px;height:4px;padding:0;background: gray;"></span>
 									@endif
-									@if($truck->status_mileage === null) 
+									@if($truck->status_mileage === null)
 										<span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--rounded"
 										style="width: 75px;height:4px;padding:0;background: transparent;"></span>
 									@endif
 								</div>
 								<div class="kt-widget__link" style="display:flex;align-items:center;">
 									<span style="min-width: 160px;">Calendario de partes: </span>&nbsp;&nbsp;
-									@if($truck->status_parts === 1) 
+									@if($truck->status_parts === 1)
 										<span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--rounded"
 										style="width: 75px;height:4px;padding:0;background: #388e3c;"></span>
 									@endif
-									@if($truck->status_parts === 2) 
+									@if($truck->status_parts === 2)
 										<span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--rounded"
 										style="width: 75px;height:4px;padding:0;background: #fbc02d;"></span>
 									@endif
-									@if($truck->status_parts === 3) 
+									@if($truck->status_parts === 3)
 										<span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--rounded"
 										style="width: 75px;height:4px;padding:0;background: #d32f2f;"></span>
 									@endif
-									@if($truck->status_parts === 0) 
+									@if($truck->status_parts === 0)
 										<span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--rounded"
 										style="width: 75px;height:4px;padding:0;background: gray;"></span>
 									@endif
-									@if($truck->status_parts === null) 
+									@if($truck->status_parts === null)
 										<span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--rounded"
 										style="width: 75px;height:4px;padding:0;background: transparent;"></span>
 									@endif
@@ -221,7 +221,7 @@
 				</div>
 			</div>
 			<div class="kt-portlet__body">
-	
+
 				<!--begin::Section-->
 				<div class="kt-section">
 					<div class="kt-section__info">
@@ -242,7 +242,7 @@
 							<tbody>
 								<tr v-for="part in parts">
 									<th v-text="part.id" scope="row" style="text-align: center;"></th>
-									<td v-text="part.name" style="text-align: center;"></td>								
+									<td v-text="part.name" style="text-align: center;"></td>
 									<td style="text-align: center;">
 										<div v-if="part.inactive_at">
 											<span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--rounded">Desactivado</span>
@@ -277,7 +277,7 @@
 					</div> --}}
 				</div>
 			</div>
-	
+
 			<!--end::Form-->
 		</div>
 	<!--end::Portlet-->
@@ -663,7 +663,7 @@
 @endsection
 
 @section('scripts')
-<script type="text/javascript">	
+<script type="text/javascript">
 	let datatable
 	let subTable
 	var app = new Vue({
@@ -687,7 +687,7 @@
 		methods: {
 			listTrucks(){
 				let me = this;
-			
+
 				axios.get(this.base_url + '/tractores/listar')
 				.then(response => {
 				me.trucks = response.data;
@@ -947,7 +947,7 @@
 							}],
 					});
 				}
-			},		
+			},
 			saveTruck() {
 				let me = this;
 				axios.post(this.base_url + '/tractores/' + document.getElementById('id_truck').value, {
@@ -1015,13 +1015,13 @@
 			closeEditModal() {
 				this.id_truck = '';
 				this.truck = [];
-				this.trailer = '';					
+				this.trailer = '';
 				this.type = '';
 				this.plates = '';
 				this.vin = '';
-				this.latest_mileage = '';					
-				this.actual_mileage = '';					
-				this.date_mileage = '';					
+				this.latest_mileage = '';
+				this.actual_mileage = '';
+				this.date_mileage = '';
 				$('#editTruckModal').modal('hide');
 			},
 			closeCreatePartModal() {
@@ -1404,7 +1404,7 @@
 			commaSeparateNumber(number){
 				while (/(\d+)(\d{3})/.test(number.toString())){
 					number = number.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2')
-				} 
+				}
 				return number
 			},
 		},

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Truck extends Model
 {
     use GeneralFunctions;
-    
+
     protected $guarded = [
         'id_truck', 'created_at', 'updated_at'
     ];
@@ -53,7 +53,7 @@ class Truck extends Model
     public function porcentaje()
     {
         $mantenimiento = Maintenance::where('truck_id', $this->id)->orderBy('id', 'desc')->first();
-        
+
         if($mantenimiento){
             $points = DB::table('assigned_points')->where('maintenance_id', $mantenimiento->id)->get();
             $total = 100/$points->count();
@@ -86,7 +86,7 @@ class Truck extends Model
         $mantenimiento = Maintenance::where('truck_id', $this->id)->orderBy('id', 'desc')->first();
 
         if($mantenimiento){
-            $fecha = Carbon::createFromFormat('Y-m-d', $mantenimiento->date);        
+            $fecha = Carbon::createFromFormat('Y-m-d', $mantenimiento->date);
             $fecha->addMonth();
             $fecha = Carbon::parse($fecha)->format('d/m/Y');
 
@@ -99,7 +99,7 @@ class Truck extends Model
 
     public function getLatestMileageInspection()
     {
-        return Carbon::parse($this->date_mileage)->format('d-m-Y');    
+        return Carbon::parse($this->date_mileage)->format('d-m-Y');
     }
 
     public function checkDecimal($number){
@@ -139,5 +139,17 @@ class Truck extends Model
             $subpart->updatePart();
             $subpart->updateTruck();
         }
+    }
+
+    public function yellowPartsExcel(){
+        $parts = Part::where('truck_id', $this->id)->where('status', 2)->where('inactive_at', null)->get();
+
+        return $parts;
+    }
+
+    public function redPartsExcel(){
+        $parts = Part::where('truck_id', $this->id)->where('status', 3)->where('inactive_at', null)->get();
+
+        return $parts;
     }
 }

@@ -86,7 +86,15 @@
 		<div class="kt-portlet__head">
 			<div class="kt-portlet__head-label" style="width:100%;display: flex;justify-content:space-between;">
 				<h3 class="kt-portlet__head-title">Cajas</h3>
-				<button type="button" class="btn btn-brand btn-md btn-bold btn-upper" @click="showCreateModal()">Agregar caja</button>
+                <div>
+                    <a href="/cajas/export_excel">
+                        <button type="button" class="btn btn-brand btn-md btn-bold btn-upper">Reporte Excel</button>
+                    </a>
+                    <a href="/cajas/export_pdf">
+                        <button type="button" class="btn btn-brand btn-md btn-bold btn-upper">Reporte PDF</button>
+                    </a>
+                    <button type="button" class="btn btn-brand btn-md btn-bold btn-upper" @click="showCreateModal()">Agregar caja</button>
+                </div>
 			</div>
 		</div>
 		<div class="kt-portlet__body">
@@ -116,9 +124,9 @@
 						<tbody>
 							<tr v-for="box in boxes">
 								<th v-text="box.id" scope="row"></th>
-								<td v-text="box.trailer"></td>								
-								<td v-text="box.type"></td>								
-								<td v-text="box.plates"></td>								
+								<td v-text="box.trailer"></td>
+								<td v-text="box.type"></td>
+								<td v-text="box.plates"></td>
 								<td v-text="box.vin"></td>
 								<td>@{{ checkDecimal(box.latest_mileage) }}</td>
 								<td>@{{ checkDecimal(box.actual_mileage) }}</td>
@@ -173,19 +181,19 @@
 								<td>Revisión en kilometraje <br/>Alerta calendario de partes</td>
 								<td style="display:flex;">
 									<div v-if="box.inactive_at">
-										<a @click="showActivateModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="Activar caja" data-original-title="Activar caja">		
-											<i class="flaticon2-refresh-arrow"></i>						
+										<a @click="showActivateModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="Activar caja" data-original-title="Activar caja">
+											<i class="flaticon2-refresh-arrow"></i>
 										</a>
 									</div>
 									<div v-else>
-										<a @click="showBoxInformationModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="Ver detalles" data-original-title="Ver detalles">		
-											<i class="flaticon2-expand"></i>						
+										<a @click="showBoxInformationModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="Ver detalles" data-original-title="Ver detalles">
+											<i class="flaticon2-expand"></i>
 										</a>
-										<a @click="showEditModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="Editar información" data-original-title="Editar información">		
-											<i class="flaticon-edit-1"></i>					
+										<a @click="showEditModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="Editar información" data-original-title="Editar información">
+											<i class="flaticon-edit-1"></i>
 										</a>
-										<a @click="showDeactivateModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="Desactivar caja" data-original-title="Desactivar caja">		
-											<i class="flaticon-delete-1"></i>						
+										<a @click="showDeactivateModal(box)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="tooltip" data-placement="top" title="Desactivar caja" data-original-title="Desactivar caja">
+											<i class="flaticon-delete-1"></i>
 										</a>
 									</div>
 								</td>
@@ -413,8 +421,8 @@
 		    	actual_mileage : '',
 		    	date_mileage : '',
 		    	method_field : '',
-		    	base_url: '<?php echo url('/'); ?>'	    	
-		    	
+		    	base_url: '<?php echo url('/'); ?>'
+
 		  	},
 			methods: {
 				truckStatus(box = []){
@@ -430,7 +438,7 @@
 				},
 		  		listTrucks(){
 		  			let me = this;
-					
+
 		  			axios.get(this.base_url + '/cajas/listar')
 			      	.then(response => {
 			        	me.boxes = response.data;
@@ -439,7 +447,7 @@
 			        	console.log(error)
 			        	this.errored = true
 			      	})
-		  		},		
+		  		},
 		  		createTruck() {
 					let me = this;
 					axios.post(this.base_url + '/cajas', {
@@ -506,13 +514,13 @@
 				closeCreateModal() {
 					this.id_box = '';
 					this.box = [];
-					this.trailer = '';					
+					this.trailer = '';
 					this.type = '';
 					this.plates = '';
 					this.vin = '';
-					this.latest_mileage = '';					
-					this.actual_mileage = '';					
-					this.date_mileage = '';					
+					this.latest_mileage = '';
+					this.actual_mileage = '';
+					this.date_mileage = '';
 					$('#createTruckModal').modal('hide');
 				},
 				saveTruck() {
@@ -589,13 +597,13 @@
 				closeEditModal() {
 					this.id_box = '';
 					this.box = [];
-					this.trailer = '';					
+					this.trailer = '';
 					this.type = '';
 					this.plates = '';
 					this.vin = '';
-					this.latest_mileage = '';					
-					this.actual_mileage = '';					
-					this.date_mileage = '';					
+					this.latest_mileage = '';
+					this.actual_mileage = '';
+					this.date_mileage = '';
 					$('#editTruckModal').modal('hide');
 				},
 				deactivateTruck() {
@@ -742,7 +750,7 @@
 				commaSeparateNumber(number){
 					while (/(\d+)(\d{3})/.test(number.toString())){
 						number = number.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2')
-					} 
+					}
 					return number
 				},
 				showBoxInformationModal(truck = []){

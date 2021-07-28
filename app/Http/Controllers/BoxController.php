@@ -11,6 +11,9 @@ use App\Movement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use App\Exports\BoxExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class BoxController extends Controller
 {
     /**
@@ -31,7 +34,7 @@ class BoxController extends Controller
 
     public function list()
     {
-        $boxes = Box::get();
+        $boxes = Box::where('inactive_at', null)->get();
 
         return $boxes;
     }
@@ -225,7 +228,7 @@ class BoxController extends Controller
 
             $movement->save();
         }
-        
+
         if($movement){
             DB::commit();
             return redirect()->route('cajas.index')->with('success', 'El movimiento se generó correctamente.');
@@ -233,5 +236,17 @@ class BoxController extends Controller
             DB::rollBack();
             return back()->with('error', 'Ocurrió un problema al generar el movimiento.');
         }
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new BoxExport, 'boxes_parts_report.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        $boxes = Box::all();
+        $pdf = \PDF::loadView('maintenance.boxes.exports', ['boxes' => $boxes]);
+        return $pdf->download('boxes_parts_report.pdf');
     }
 }

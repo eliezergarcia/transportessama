@@ -1,5 +1,5 @@
 <?php
-
+use Dompdf\Dompdf;
 namespace App\Http\Controllers;
 
 use App\Truck;
@@ -9,6 +9,9 @@ use App\Service;
 use App\Owner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
+use App\Exports\TrucksExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TruckController extends Controller
 {
@@ -27,7 +30,7 @@ class TruckController extends Controller
 
     public function list()
     {
-        $trucks = Truck::get();
+        $trucks = Truck::where('inactive_at', null)->get();
 
         return $trucks;
     }
@@ -35,7 +38,7 @@ class TruckController extends Controller
     public function status($id)
     {
         $truck = Truck::where('id', $id)->with(['type', 'brand', 'service', 'owner'])->get();
-        return $truck->present()->statusBadge();   
+        return $truck->present()->statusBadge();
     }
 
     public function findPlates(Request $request, $id)
@@ -211,5 +214,17 @@ class TruckController extends Controller
             DB::rollBack();
             return back()->with('error', 'Ocurrió un problema al desactivar el tractor.');
         }
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new TrucksExport, 'tractor_parts_report.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        $trucks = Truck::all();
+        $pdf = \PDF::loadView('maintenance.trucks.exports', ['trucks' => $trucks]);
+        return $pdf->download('tractor_parts_report.pdf');
     }
 }
