@@ -223,7 +223,11 @@ class TruckController extends Controller
 
     public function exportPdf()
     {
-        $trucks = Truck::all();
+        $trucks = Truck::where('status_parts', '!=', null)
+        ->where('status_parts', '!=', 0)
+        ->where('status_parts', '!=', 1)
+        ->where('inactive_at', null)
+        ->get();
         $pdf = \PDF::loadView('maintenance.trucks.exports', ['trucks' => $trucks]);
         return $pdf->download('tractor_parts_report.pdf');
     }

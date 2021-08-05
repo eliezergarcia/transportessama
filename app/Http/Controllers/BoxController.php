@@ -245,7 +245,11 @@ class BoxController extends Controller
 
     public function exportPdf()
     {
-        $boxes = Box::all();
+        $boxes = Box::where('status_parts', '!=', null)
+        ->where('status_parts', '!=', 0)
+        ->where('status_parts', '!=', 1)
+        ->where('inactive_at', null)
+        ->get();
         $pdf = \PDF::loadView('maintenance.boxes.exports', ['boxes' => $boxes]);
         return $pdf->download('boxes_parts_report.pdf');
     }

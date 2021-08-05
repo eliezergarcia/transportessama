@@ -16,7 +16,11 @@ class BoxExport implements FromView
     public function view(): View
     {
         return view('maintenance.boxes.exports', [
-            'boxes' => Box::all()
+            'boxes' => Box::where('status_parts', '!=', null)
+                            ->where('status_parts', '!=', 0)
+                            ->where('status_parts', '!=', 1)
+                            ->where('inactive_at', null)
+                            ->get()
         ]);
     }
 }

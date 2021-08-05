@@ -142,13 +142,14 @@ class Truck extends Model
     }
 
     public function yellowPartsExcel(){
-        $parts = Part::where('truck_id', $this->id)->where('status', 2)->where('inactive_at', null)->get();
-
+        // $parts = Part::where('truck_id', $this->id)->where('status', 2)->where('inactive_at', null)->get();
+        $subparts = Subpart::where('truck_id', $this->id)->where('status', 2)->where('inactive_at', null)->get();
         return $parts;
     }
 
     public function redPartsExcel(){
-        $parts = Part::where('truck_id', $this->id)->where('status', 3)->where('inactive_at', null)->get();
+        // $parts = Part::where('truck_id', $this->id)->where('status', 3)->where('inactive_at', null)->get();
+        $subparts = Subpart::where('truck_id', $this->id)->where('status', 3)->where('inactive_at', null)->get();
 
         return $parts;
     }

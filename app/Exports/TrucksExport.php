@@ -16,7 +16,11 @@ class TrucksExport implements FromView
     public function view(): View
     {
         return view('maintenance.trucks.exports', [
-            'trucks' => Truck::all()
+            'trucks' => Truck::where('status_parts', '!=', null)
+                            ->where('status_parts', '!=', 0)
+                            ->where('status_parts', '!=', 1)
+                            ->where('inactive_at', null)
+                            ->get()
         ]);
     }
 }

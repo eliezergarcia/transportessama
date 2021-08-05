@@ -118,14 +118,16 @@ class Box extends Model
     }
 
     public function yellowPartsExcel(){
-        $parts = Part::where('box_id', $this->id)->where('status', 2)->where('inactive_at', null)->get();
+        // $parts = Part::where('box_id', $this->id)->where('status', 2)->where('inactive_at', null)->get();
+        $subparts = Subpart::where('box_id', $this->id)->where('status', 2)->where('inactive_at', null)->get();
 
-        return $parts;
+        return $subparts;
     }
 
     public function redPartsExcel(){
-        $parts = Part::where('box_id', $this->id)->where('status', 3)->where('inactive_at', null)->get();
+        // $parts = Part::where('box_id', $this->id)->where('status', 3)->where('inactive_at', null)->get();
+        $subparts = Subpart::where('box_id', $this->id)->where('status', 3)->where('inactive_at', null)->get();
 
-        return $parts;
+        return $subparts;
     }
 }
